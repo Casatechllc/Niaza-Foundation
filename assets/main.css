@@ -44,8 +44,8 @@
   --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 
   /* Transitions */
-  --transition-default: all 0.3s ease-in-out;
-  --transition-color: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  /* --transition-default: all 0.3s ease-in-out;
+  --transition-color: color 0.3s ease-in-out, background-color 0.3s ease-in-out; */
 }
 
 /* Base Styles for Minimalist/Modern Look (Using the variables) */

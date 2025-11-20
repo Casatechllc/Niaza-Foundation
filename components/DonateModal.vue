@@ -3,7 +3,7 @@
   <div v-if="isOpen" class="modal-backdrop" @click.self="closeModal" @keydown.esc="closeModal">
     
     <!-- Modal Content -->
-    <div class="modal-content-wrapper" data-aos="zoom-in">
+    <div class="modal-content-wrapper" data-aos="zoom-in" data-aos-duration="300" >
       <div class="modal-content-body">
         
         <div class="d-flex justify-content-between align-items-start mb-4">

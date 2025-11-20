@@ -107,7 +107,7 @@ onBeforeUnmount(() => {
 
 .nav-link.active {
   color: var(--color-accent-secondary) !important; /* Vibrant green for active link */
-  border-bottom: 2px solid var(--color-accent-secondary);
+  border-bottom: none;
   padding-bottom: 5px;
 }
 
@@ -116,5 +116,13 @@ onBeforeUnmount(() => {
     /* Padding adjustments for the button in the navbar */
     padding: var(--spacing-sm) var(--spacing-md);
     font-size: var(--font-size-base);
+}
+
+@media (min-width: 992px) { /* min-width: 992px is Bootstrap's 'lg' breakpoint */
+  .nav-link.active {
+    color: var(--color-accent-secondary) !important; /* Vibrant green for active link */
+    border-bottom: 2px solid var(--color-accent-secondary); /* This is the line you want to hide on mobile */
+    padding-bottom: 5px;
+  }
 }
 </style>
