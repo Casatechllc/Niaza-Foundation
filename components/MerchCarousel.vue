@@ -14,27 +14,28 @@
       <div 
         v-for="(item, index) in products" 
         :key="item.id"
-        class="absolute transition-all duration-700 cubic-bezier cursor-pointer group"
+        class="absolute transition-all duration-700 cubic-bezier group"
         :style="getCardStyle(index)"
-        @click.capture="handleCardClick(index)"
       >
         <div 
           v-if="activeIndex !== index"
-          class="absolute inset-y-0 -inset-x-24 z-50 bg-transparent"
+          @click="handleCardClick(index)"
+          class="absolute inset-y-0 -inset-x-24 z-50 bg-transparent cursor-pointer pointer-events-auto"
         ></div>
 
-        <div class="w-[280px] sm:w-[420px] drop-shadow-2xl relative z-10 pointer-events-auto">
+        <div 
+          class="w-[280px] sm:w-[420px] drop-shadow-2xl relative z-10"
+          :class="activeIndex === index ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-60'"
+        >
           <MerchCard 
             :product="item" 
             @add-to-cart="$emit('add-to-cart', $event)"
-            :class="[activeIndex === index ? 'opacity-100' : 'pointer-events-none opacity-60 hover:opacity-100 transition-opacity']"
           />
         </div>
       </div>
-
     </div>
 
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center pointer-events-auto z-50">
       <div class="flex items-center gap-6">
         <button @click="prev" class="p-4 rounded-full border border-white/5 bg-white/5 hover:border-amber-500 text-amber-500 transition-all active:scale-90">
           <i class="fas fa-chevron-left"></i>
@@ -53,7 +54,7 @@
           <i class="fas fa-chevron-right"></i>
         </button>
       </div>
-      <p class="text-slate-500 text-sm italic">Item {{ activeIndex + 1 }} of {{ products.length }}</p>
+      <p class="text-slate-500 text-sm italic mt-4">Item {{ activeIndex + 1 }} of {{ products.length }}</p>
     </div>
   </section>
 </template>
@@ -72,7 +73,7 @@ const activeIndex = ref(0);
 // Interaction State
 const isDragging = ref(false);
 const startX = ref(0);
-const startY = ref(0); // Track vertical start to separate scroll from swipe
+const startY = ref(0); 
 
 const getCardStyle = (index) => {
   const diff = index - activeIndex.value;
@@ -123,17 +124,13 @@ const handleInteractionMove = (x, y) => {
   const diffX = startX.value - x;
   const diffY = startY.value - y;
 
-  /**
-   * If the vertical movement (diffY) is greater than horizontal (diffX),
-   * the user is trying to scroll the page. We kill the drag state 
-   * to let the browser take over the scroll.
-   */
+  // Axis Check: If scrolling vertically, stop the carousel swipe
   if (Math.abs(diffY) > Math.abs(diffX)) {
     isDragging.value = false;
     return;
   }
 
-  // Horizontal swipe threshold
+  // Swipe Threshold
   if (Math.abs(diffX) > 60) {
     if (diffX > 0) next();
     else prev();
@@ -145,6 +142,7 @@ const handleDragStart = (e) => handleInteractionStart(e.pageX, e.pageY);
 const handleDragMove = (e) => handleInteractionMove(e.pageX, e.pageY);
 const handleDragEnd = () => { isDragging.value = false; };
 
+// 5. Ensure we pass coordinates to Touch events too
 const handleTouchStart = (e) => handleInteractionStart(e.touches[0].clientX, e.touches[0].clientY);
 const handleTouchMove = (e) => handleInteractionMove(e.touches[0].clientX, e.touches[0].clientY);
 const handleTouchEnd = () => { isDragging.value = false; };
@@ -160,7 +158,21 @@ const handleTouchEnd = () => { isDragging.value = false; };
   transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* 1. Base Styles (Mobile First) */
 section {
-  touch-action: pan-y;
+  pointer-events: auto; /* Enable touch/swipe for mobile */
+  touch-action: pan-y;  /* Allow vertical page scroll */
+}
+
+/* 2. Laptop/Desktop Override */
+@media (min-width: 1024px) {
+  section {
+    pointer-events: none; /* Disable for mouse to prevent overlap issues */
+  }
+  
+  /* Ensure navigation buttons and active card stay clickable on laptop */
+  .pointer-events-auto {
+    pointer-events: auto;
+  }
 }
 </style>
