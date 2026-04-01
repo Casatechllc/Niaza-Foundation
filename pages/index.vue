@@ -1,231 +1,181 @@
 <template>
-  <div class="nianza-home">
+  <div class="min-h-screen bg-slate-50 font-sans text-slate-900 antialiased">
     
-    <section class="hero bg-primary-light text-center py-5" data-aos="fade-down">
-      <div class="container">
-        <img src="/logo.png" alt="Nianza Foundation Logo" class="logo-hero mb-4" />
-        <h1 class="display-4 font-weight-bold text-primary">A Call for Partnership: Public Financing for Shelter Development</h1>
-        <h2 class="h3 text-secondary mb-0">Building Hope and Dignity for Every Congolese Without a Home</h2>
-      </div>
-    </section>
+    <HomeHero />
 
-    <section class="section-padding" data-aos="fade-up">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <h3 class="mb-4 text-center text-primary">Our Mission: Safe Housing for the DRC's Vulnerable</h3>
-            <blockquote class="blockquote text-center border-left-primary p-4 bg-light-grey">
-              <p class="mb-0 font-weight-normal">
-                Nianza Foundation is a nonprofit organization dedicated to providing safe and sustainable housing solutions for vulnerable populations in the Democratic Republic of the Congo. The foundation is currently leading a project to build homeless shelters aimed at offering temporary housing, essential services, and pathways to stability for individuals and families experiencing homelessness. Through partnerships with local communities, government agencies, and international supporters, Nianza Foundation is working to reduce homelessness and promote dignity, safety, and hope for those in need.
-              </p>
-            </blockquote>
-            <div class="text-center mt-5">
-              <NuxtLink to="/about" class="btn btn-secondary me-3">Learn More About Us</NuxtLink>
-              <button class="btn btn-cta" @click="$emit('open-donate')">Donate Now</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding bg-light-grey" data-aos="fade-right">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <h2 class="text-primary">An Urgent Challenge: Rebuilding Lives in the DRC</h2>
-            <p>
-              Across the Democratic Republic of the Congo (DRC), homelessness remains an urgent humanitarian and social challenge. Thousands of families—especially women, children, and people displaced by conflict or poverty—are forced to live without safe shelter. The Nianza Foundation has taken on a vital mission: to build safe, sustainable, and dignified homeless shelters that provide not only a roof, but a pathway to recovery, empowerment, and reintegration into society.
+    <main>
+      <section class="py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 
+              v-motion
+              :initial="{ opacity: 0, y: 20 }"
+              :visible="{ opacity: 1, y: 0 }"
+              class="text-sm font-bold tracking-wider text-secondary uppercase"
+            >
+              Our Mission
+            </h2>
+            <p class="mt-4 text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+              Safe Housing for the DRC's Vulnerable
             </p>
-            <p class="font-weight-bold mt-4">
-              Public funding is essential to make the Nianza Foundation's shelter project viable at scale: it provides the capital for land, basic infrastructure, and staffing that private donations alone rarely cover, unlocks partnerships with local government and services (health, protection, social services), and ensures the shelter is affordable, sustainable, and accountable to the communities it serves.
+          </div>
+
+          <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible="{ opacity: 1, y: 0 }"
+            class="mt-16 rounded-2xl bg-white p-8 shadow-md border-l-8 border-secondary sm:p-12"
+          >
+            <p class="text-xl leading-relaxed text-slate-700 max-w-prose mx-auto italic">
+              "Nianza Foundation is a nonprofit organization dedicated to providing safe and sustainable housing solutions for vulnerable populations in the Democratic Republic of the Congo. Through partnerships with local communities and government agencies, we work to reduce homelessness and promote dignity, safety, and hope for those in need."
             </p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section-padding" data-aos="fade-up">
-      <div class="container">
-        <h2 class="text-center mb-5 text-primary">Scaling Impact: Why Government Support is Essential</h2>
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            <div class="p-4 border rounded shadow-sm h-100 hover-card">
-              <h3 class="h4 text-accent"><i class="fas fa-layer-group mr-2"></i> Capital Intensity & Scale</h3>
-              <p>Building safe, weather-resistant shelters (land, foundations, walls, water, sanitation, electricity) demands large upfront investments and predictable cash flow that private gifts and ad-hoc fundraising often cannot supply.</p>
+      <section class="bg-primary py-24 sm:py-32 text-white">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+            <div 
+              v-motion
+              :initial="{ opacity: 0, x: -30 }"
+              :visible="{ opacity: 1, x: 0 }"
+            >
+              <h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
+                An Urgent Challenge: Rebuilding Lives in the DRC
+              </h2>
+              <div class="space-y-6 text-slate-300 text-lg leading-7">
+                <p>
+                  Across the DRC, thousands of families—especially women and children displaced by conflict—are forced to live without safe shelter.
+                </p>
+                <p class="font-semibold text-white border-l-2 border-accent pl-4">
+                  Public funding is essential to make this project viable at scale. It provides capital for land and infrastructure that private donations alone rarely cover.
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="col-md-6 mb-4">
-            <div class="p-4 border rounded shadow-sm h-100 hover-card">
-              <h3 class="h4 text-accent"><i class="fas fa-link mr-2"></i> Linking to Vital Public Services</h3>
-              <p>Shelters require connections to essential public infrastructure (water, drainage) and formal linkage to state services (health, security, social work) which are best secured and sustained through government participation.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding bg-primary-light" data-aos="fade-left">
-      <div class="container">
-        <h2 class="text-center mb-5 text-primary">The Ask: Co-funding the Future of Shelter</h2>
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <p class="lead text-center mb-5">
-              The Nianza Foundation seeks public financial support of any amount to co-fund the first phase of shelter development in key urban areas such as Kinshasa where the homeless population is very high.
-            </p>
             
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-              
-              <div class="col">
-                <div class="card h-100 p-3 shadow border-0 hover-card" data-aos="zoom-in">
-                  <div class="card-body">
-                    <h5 class="card-title text-accent font-weight-bold">
-                      <i class="fas fa-hammer mr-2"></i> Capital & Infrastructure
-                    </h5>
-                    <p class="card-text">
-                      Provide capital for land acquisition, site preparation, and infrastructure (water, sanitation, electricity, and drainage).
-                    </p>
-                  </div>
-                </div>
+            <div class="grid grid-cols-1 gap-6">
+              <div 
+                v-motion-slide-visible-right
+                class="bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10 shadow-sm hover:bg-white/10 transition-all"
+              >
+                <h3 class="text-xl font-bold text-tertiary mb-3 uppercase tracking-wide text-sm">Capital Intensity</h3>
+                <p class="text-slate-300">Building weather-resistant foundations, sanitation, and electricity demands predictable cash flow supplied by government participation.</p>
               </div>
-
-              <div class="col">
-                <div class="card h-100 p-3 shadow border-0 hover-card" data-aos="zoom-in">
-                  <div class="card-body">
-                    <h5 class="card-title text-accent font-weight-bold">
-                      <i class="fas fa-users-cog mr-2"></i> Staffing & Operations
-                    </h5>
-                    <p class="card-text">
-                      Cover part of the operational and staffing costs for professional social services and health outreach.
-                    </p>
-                  </div>
-                </div>
+              <div 
+                v-motion-slide-visible-right
+                class="bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10 shadow-sm hover:bg-white/10 transition-all"
+              >
+                <h3 class="text-xl font-bold text-tertiary mb-3 uppercase tracking-wide text-sm">Vital Public Services</h3>
+                <p class="text-slate-300">Shelters require formal linkage to state health, security, and social work services to ensure long-term stability for residents.</p>
               </div>
-
-              <div class="col">
-                <div class="card h-100 p-3 shadow border-0 hover-card" data-aos="zoom-in">
-                  <div class="card-body">
-                    <h5 class="card-title text-accent-secondary font-weight-bold">
-                      <i class="fas fa-leaf mr-2"></i> Long-term Sustainability
-                    </h5>
-                    <p class="card-text">
-                      Enable long-term sustainability through a stable funding base and alignment with national social protection policies.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col">
-                <div class="card h-100 p-3 shadow border-0 hover-card" data-aos="zoom-in">
-                  <div class="card-body">
-                    <h5 class="card-title text-accent-secondary font-weight-bold">
-                      <i class="fas fa-gavel mr-2"></i> Government Commitment
-                    </h5>
-                    <p class="card-text">
-                      Demonstrate government commitment to tackling homelessness, encouraging greater contributions from international donors, development agencies, and private partners.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
             </div>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-padding" data-aos="fade-up">
-      <div class="container">
-        <div class="row">
-          
-          <div class="col-md-6 mb-5">
-            <h2 class="text-primary"><i class="fas fa-handshake mr-2"></i> Our Commitment to Transparency</h2>
-            <ul class="list-unstyled checklist">
-              <li class="mb-2"><i class="fas fa-check-circle mr-2 text-accent-secondary"></i> Publish quarterly progress and financial reports;</li>
-              <li class="mb-2"><i class="fas fa-check-circle mr-2 text-accent-secondary"></i> Conduct annual independent audits;</li>
-              <li class="mb-2"><i class="fas fa-check-circle mr-2 text-accent-secondary"></i> Use performance indicators (number of residents served, transitions to permanent housing, job placements);</li>
-              <li class="mb-2"><i class="fas fa-check-circle mr-2 text-accent-secondary"></i> Maintain a joint monitoring committee with government and community representatives.</li>
-            </ul>
-          </div>
-          
-          <div class="col-md-6 mb-5">
-            <h2 class="text-primary"><i class="fas fa-users mr-2"></i> Laying the Foundation for a National Model</h2>
-            <p>
-              By supporting this initiative, the government and its partners will not only address an urgent social crisis but also lay the foundation for a national model of homeless care and reintegration. Together, we can transform vulnerable lives and build hope and dignity in the DRC.
-            </p>
-            <button class="btn btn-cta mt-3" @click="$emit('open-donate')">Support Our Vision Today</button>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <div id="donate-section"></div>
+      <section class="py-24 sm:py-32 bg-slate-50">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-primary sm:text-4xl">The Ask: Co-funding the Future of Shelter</h2>
+            <p class="mt-4 text-lg text-slate-600">Phase one focuses on high-density urban areas like Kinshasa.</p>
+          </div>
 
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div v-for="(item, index) in askItems" :key="index"
+              v-motion
+              :initial="{ opacity: 0, scale: 0.9 }"
+              :visible="{ opacity: 1, scale: 1, transition: { delay: index * 100 } }"
+              class="group bg-white p-8 rounded-2xl shadow-sm border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+            >
+              <div class="mb-5 inline-block rounded-lg bg-slate-50 p-3 text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+                <i :class="[item.icon, 'text-2xl']"></i>
+              </div>
+              <h3 class="text-lg font-bold text-primary mb-3">{{ item.title }}</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">{{ item.description }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-24 bg-white">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div 
+              v-motion
+              :initial="{ opacity: 0, x: -20 }"
+              :visible="{ opacity: 1, x: 0 }"
+            >
+              <h2 class="text-2xl font-bold text-secondary mb-8 flex items-center gap-3">
+                <i class="fas fa-handshake"></i> Transparency
+              </h2>
+              <ul class="space-y-4">
+                <li v-for="item in transparencyItems" :key="item" class="flex items-start gap-3 text-slate-700">
+                  <i class="fas fa-check-circle mt-1 text-tertiary"></i>
+                  <span>{{ item }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <div 
+              v-motion
+              :initial="{ opacity: 0, x: 20 }"
+              :visible="{ opacity: 1, x: 0 }"
+              class="flex flex-col justify-center rounded-2xl bg-primary p-8 text-white sm:p-12 shadow-2xl"
+            >
+              <h2 class="text-2xl text-white font-bold mb-4">Laying the Foundation for a National Model</h2>
+              <p class="text-slate-300 mb-8">
+                Together, we can transform vulnerable lives and build hope and dignity in the DRC. Support the first phase of our development today.
+              </p>
+              <button 
+                @click="handleDonateClick"
+                class="inline-flex justify-center rounded-full bg-accent px-8 py-4 text-base font-bold text-white shadow-lg hover:bg-orange-700 hover:scale-105 transition-all active:scale-95"
+              >
+                Support Our Vision Today
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="donate-section" class="h-1"></div>
   </div>
 </template>
 
-<script>
-// ... (script remains the same)
-export default {
-  head: {
-    title: 'Home - Nianza Foundation: Building Hope in DRC',
-  },
-  methods: {
-    scrollToDonate() {
-      // Simple scroll function to target the hidden anchor (or the section above it)
-      const donateSection = document.getElementById('donate-section');
-      if (donateSection) {
-        donateSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+<script setup>
+
+import { inject } from 'vue';
+
+// MUST match the string 'openDonateModal' from app.vue
+const openDonate = inject('openDonateModal');
+
+const handleDonateClick = () => {
+  if (openDonate) {
+    openDonate();
   }
-}
+};
+
+const askItems = [
+  { title: 'Infrastructure', icon: 'fas fa-hammer', description: 'Capital for land acquisition, site preparation, water, and drainage systems.' },
+  { title: 'Operations', icon: 'fas fa-users-cog', description: 'Staffing costs for professional social services and specialized health outreach.' },
+  { title: 'Sustainability', icon: 'fas fa-leaf', description: 'Alignment with national social protection policies for long-term impact.' },
+  { title: 'Commitment', icon: 'fas fa-gavel', description: 'Demonstrating government resolve to attract international donor partnerships.' }
+];
+
+const transparencyItems = [
+  "Publish quarterly progress and financial reports",
+  "Conduct annual independent audits",
+  "Use data-driven performance indicators",
+  "Joint monitoring with community representatives"
+];
+
+defineEmits(['open-donate']);
+
+useHead({
+  title: 'Nianza Foundation | Public Financing for Shelter Development',
+  meta: [
+    { name: 'description', content: 'Building safe, sustainable housing for vulnerable populations in the DRC.' }
+  ]
+});
 </script>
-
-<style scoped>
-/* ... (scoped styles remain the same) */
-.hero {
-  padding-top: var(--spacing-xl);
-  padding-bottom: var(--spacing-xl);
-}
-.logo-hero {
-  max-width: 150px;
-}
-.border-left-primary {
-  border-left: 8px solid var(--color-primary);
-}
-.funding-list span, .checklist li span {
-  /* Aligns text with the icon */
-  line-height: 1.5; 
-}
-.fa-chevron-right, .fa-check-circle {
-  font-size: var(--font-size-lg);
-  flex-shrink: 0; /* Prevents icon from shrinking on small screens */
-}
-
-.hover-card, .btn {
-  transition: var(--transition-default);
-}
-
-/* Hover effect for cards/panels */
-.hover-card:hover {
-  transform: translateY(-5px); /* Lift the card slightly */
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Enhance the shadow */
-}
-
-.btn-cta {
-    padding: .5rem;
-}
-
-/* Hover effect for primary call-to-action buttons (CTA) */
-.btn-cta:hover {
-  transform: scale(1.02); /* Slight increase in size */
-  box-shadow: 0 8px 20px rgba(77, 174, 61, 0.4); /* Stronger shadow with accent color */
-}
-
-/* Hover effect for secondary buttons */
-.btn-secondary:hover {
-  transform: scale(1.02);
-  border-color: var(--color-accent);
-}
-</style>

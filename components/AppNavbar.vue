@@ -1,128 +1,157 @@
 <template>
-  <nav ref="navbarRef" class="navbar navbar-expand-lg navbar-dark fixed-top" :style="{ backgroundColor: 'var(--color-primary)' }">
-    <div class="container-fluid container-xl">
+  <header 
+    class="sticky top-0 z-50 w-full border-b transition-all duration-300"
+    :class="[
+      isScrolled 
+        ? 'bg-white/90 backdrop-blur-md border-gray-200 shadow-md py-2' 
+        : 'bg-white border-transparent py-4'
+    ]"
+  >
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8" aria-label="Global Navigation">
       
-      <NuxtLink class="navbar-brand d-flex align-items-center" to="/">
-        <img src="/logo.png" alt="Nianza Foundation Logo" class="navbar-logo me-2" />
-        <span class="font-weight-bold">Nianza Foundation</span>
-      </NuxtLink>
+      <div class="flex lg:flex-1">
+        <NuxtLink to="/" class="-m-1.5 p-1.5 flex items-center gap-3 transition-opacity hover:opacity-90">
+          <img src="/logo.png" alt="Nianza Foundation Logo" class="h-10 w-auto object-contain" />
+          <span class="hidden text-xl font-bold tracking-tight text-gray-900 sm:block">Nianza Foundation</span>
+        </NuxtLink>
+      </div>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="flex lg:hidden">
+        <button 
+          type="button" 
+          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+          @click="mobileMenuOpen = true"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
 
-      <div ref="collapseRef" class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <NuxtLink class="nav-link" active-class="active" to="/" @click="closeMenu">Home</NuxtLink>
-          </li>
-          <li class="nav-item">
-            <NuxtLink class="nav-link" active-class="active" to="/about" @click="closeMenu">About Us</NuxtLink>
-          </li>
-          <li class="nav-item">
-            <NuxtLink class="nav-link" active-class="active" to="/services" @click="closeMenu">Services</NuxtLink>
-          </li>
-          <li class="nav-item">
-            <NuxtLink class="nav-link" active-class="active" to="/merch" @click="closeMenu">Merch</NuxtLink>
-          </li>
-        </ul>
-        
-        <div class="d-flex">
-          <button class="btn btn-cta" @click="$emit('open-donate')">
-            <i class="fas fa-heart mr-2"></i> Donate Now
+      <ul class="hidden lg:flex lg:gap-x-10">
+        <li>
+          <NuxtLink 
+            to="/" 
+            class="relative py-2 text-sm font-semibold transition-colors duration-200"
+            active-class="text-gray-900 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary"
+            inactive-class="text-gray-500 hover:text-gray-900"
+          >
+            Sustainable Housing
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink 
+            to="/about" 
+            class="relative py-2 text-sm font-semibold transition-colors duration-200"
+            active-class="text-gray-900 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary"
+            inactive-class="text-gray-500 hover:text-gray-900"
+          >
+            Our Mission
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink 
+            to="/services" 
+            class="relative py-2 text-sm font-semibold transition-colors duration-200"
+            active-class="text-gray-900 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary"
+            inactive-class="text-gray-500 hover:text-gray-900"
+          >
+            Community Services
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink 
+            to="/merch" 
+            class="relative py-2 text-sm font-semibold transition-colors duration-200"
+            active-class="text-gray-900 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary"
+            inactive-class="text-gray-500 hover:text-gray-900"
+          >
+            Support Shop
+          </NuxtLink>
+        </li>
+      </ul>
+
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <button 
+          @click="handleDonateClick"
+          class="rounded-full bg-accent px-6 py-2.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-accent/90 hover:shadow-md active:scale-95"
+        >
+          Partner With Us
+        </button>
+      </div>
+    </nav>
+
+    <div v-if="mobileMenuOpen" class="lg:hidden" role="dialog" aria-modal="true">
+      <div class="fixed inset-0 z-50 bg-gray-900/20 backdrop-blur-sm" @click="mobileMenuOpen = false"></div>
+      <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="flex items-center justify-between">
+          <NuxtLink to="/" class="-m-1.5 p-1.5" @click="mobileMenuOpen = false">
+            <img class="h-10 w-auto" src="/logo.png" alt="Nianza Foundation Logo" />
+          </NuxtLink>
+          <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <ul class="space-y-2 py-6">
+              <li>
+                <NuxtLink to="/" @click="mobileMenuOpen = false" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Sustainable Housing</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/about" @click="mobileMenuOpen = false" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Our Mission</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/services" @click="mobileMenuOpen = false" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Community Services</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/merch" @click="mobileMenuOpen = false" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Support Shop</NuxtLink>
+              </li>
+            </ul>
+            <div class="py-6">
+              <button 
+                @click="handleDonateClick"
+                class="w-full rounded-full bg-accent px-6 py-3 text-center text-base font-bold text-white shadow-lg active:scale-95"
+              >
+                Partner With Us
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </nav>
+  </header>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onUnmounted, inject } from 'vue';
 
-// References to DOM elements
-const navbarRef = ref(null)
-const collapseRef = ref(null)
+const mobileMenuOpen = ref(false);
+const isScrolled = ref(false);
 
-// Function to close the Bootstrap menu
-const closeMenu = () => {
-  // Check if window exists (client-side) and if bootstrap is loaded
-  if (typeof window !== 'undefined' && window.bootstrap && collapseRef.value) {
-    
-    // Only attempt to hide if the menu is actually open (has class 'show')
-    if (collapseRef.value.classList.contains('show')) {
-      // Get the existing Bootstrap Collapse instance or create a new one
-      const bsCollapse = window.bootstrap.Collapse.getInstance(collapseRef.value) || new window.bootstrap.Collapse(collapseRef.value)
-      bsCollapse.hide()
-    }
-  }
-}
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10;
+};
 
-// Event Listener: Detect clicks outside the navbar
-const handleClickOutside = (event) => {
-  // If navbarRef exists AND the clicked element is NOT inside the navbar
-  if (navbarRef.value && !navbarRef.value.contains(event.target)) {
-    closeMenu()
-  }
-}
-
-// Add listeners when component mounts
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
+  window.addEventListener('scroll', handleScroll);
+});
 
-// Clean up listeners when component is removed
-onBeforeUnmount(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
-</script>
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 
-<style scoped>
-.navbar {
-  /* Use z-index to ensure the fixed navbar stays on top of page content */
-  z-index: 1030;
-  box-shadow: var(--primary-shadow);
-  /* Apply smooth color transition on hover/focus if needed, though background is fixed */
-  transition: var(--transition-default); 
-}
+// MUST match the string 'openDonateModal' from app.vue
+const openDonate = inject('openDonateModal');
 
-.navbar-logo {
-  height: 30px; /* Adjust size for navbar */
-  margin-right: var(--spacing-sm);
-}
-
-/* Customizing the appearance of the navigation links */
-.nav-link {
-  color: var(--color-text-light) !important;
-  font-weight: var(--font-weight-normal);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin: 0 var(--spacing-sm);
-  transition: var(--transition-color);
-}
-
-.nav-link:hover {
-  color: var(--color-secondary) !important; /* Secondary color on hover */
-}
-
-.nav-link.active {
-  color: var(--color-accent-secondary) !important; /* Vibrant green for active link */
-  border-bottom: none;
-  padding-bottom: 5px;
-}
-
-/* Ensure the CTA button uses the defined brand styling */
-.btn-cta {
-    /* Padding adjustments for the button in the navbar */
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: var(--font-size-base);
-}
-
-@media (min-width: 992px) { /* min-width: 992px is Bootstrap's 'lg' breakpoint */
-  .nav-link.active {
-    color: var(--color-accent-secondary) !important; /* Vibrant green for active link */
-    border-bottom: 2px solid var(--color-accent-secondary); /* This is the line you want to hide on mobile */
-    padding-bottom: 5px;
+const handleDonateClick = () => {
+  if (openDonate) {
+    openDonate();
   }
-}
-</style>
+};
+</script>

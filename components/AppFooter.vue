@@ -1,45 +1,59 @@
 <template>
-  <footer class="footer mt-auto py-5" :style="{ backgroundColor: 'var(--color-primary)' }">
-    <div class="container text-light">
-      <div class="row align-items-center">
+  <footer class="w-full bg-primary pt-16 pb-8 text-white border-t border-white/5">
+    
+    <div class="mx-auto max-w-[1800px] px-6 lg:px-12">
+      
+      <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
         
-        <div class="col-md-5 mb-4 mb-md-0">
-          <div class="d-flex align-items-center mb-3">
-            <img src="/logo.png" alt="Nianza Foundation Logo" class="footer-logo me-3" />
-            <h4 class="mb-0 text-light">Nianza Foundation</h4>
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-4 mb-6">
+            <img src="/logo.png" alt="Nianza Foundation Logo" class="h-12 w-auto" />
+            <h4 class="text-2xl font-bold tracking-tight">Nianza Foundation</h4>
           </div>
-          <p class="small text-light-grey">
-            Building hope and dignity for every Congolese without a home. Providing safe shelter, empowerment, and a pathway to reintegration.
+          <p class="text-slate-400 leading-relaxed max-w-md">
+            Building hope and dignity for every Congolese without a home. 
+            Providing safe shelter, empowerment, and a sustainable pathway 
+            to community reintegration.
           </p>
         </div>
 
-        <div class="col-md-4 mb-4 mb-md-0 text-center">
-      <h5 class="mb-3 text-secondary">Join Our Mission</h5>
-      <button class="btn btn-cta btn-lg shadow-lg" @click="openDonateModal">
-        <i class="fas fa-hand-holding-heart mr-2"></i> Donate Now
-      </button>
-    </div>
+        <div class="flex flex-col items-center lg:col-span-4 lg:items-center">
+          <h5 class="text-secondary font-bold uppercase tracking-widest text-sm mb-6">Join Our Mission</h5>
+          <button 
+            @click="handleDonateClick"
+            class="group inline-flex items-center gap-3 rounded-full bg-accent px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:bg-orange-700 hover:scale-105 active:scale-95"
+          >
+            <i class="fas fa-hand-holding-heart"></i>
+            <span>Donate Now</span>
+          </button>
+        </div>
 
-        <div class="col-md-3 text-md-right text-center">
-          <h5 class="mb-3 text-secondary">Contact Us</h5>
-          <ul class="list-unstyled small text-light-grey">
-            <li><i class="fas fa-map-marker-alt mr-2"></i> Kinshasa, DRC</li>
-            <li><i class="fas fa-envelope mr-2"></i> info@nianzafoundation.org</li>
+        <div class="lg:col-span-3 lg:text-right">
+          <h5 class="text-secondary font-bold uppercase tracking-widest text-sm mb-6">Contact Us</h5>
+          <ul class="space-y-4 text-slate-400">
+            <li class="flex items-center justify-start lg:justify-end gap-3">
+              <span>Kinshasa, DRC</span>
+              <i class="fas fa-map-marker-alt text-tertiary"></i>
+            </li>
+            <li class="flex items-center justify-start lg:justify-end gap-3">
+              <a href="mailto:info@nianzafoundation.org" class="hover:text-white transition-colors">info@nianzafoundation.org</a>
+              <i class="fas fa-envelope text-tertiary"></i>
+            </li>
           </ul>
         </div>
       </div>
 
-      <hr :style="{ borderColor: 'rgba(255, 255, 255, 0.2)' }" class="my-4">
-
-      <div class="row small">
-        <div class="col-12 text-center text-light-grey">
-          <p class="mb-1">
+      <div class="mt-16 border-t border-white/10 pt-8">
+        <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <p class="text-sm text-slate-500">
+            &copy; {{ new Date().getFullYear() }} Nianza Foundation. All Rights Reserved.
+          </p>
+          <p class="text-sm text-slate-500">
             Powered by 
-            <a href="https://casatechllc.com" target="_blank" class="footer-link">
-              <span class="text-casatech-highlight">Casatech LLC</span>
+            <a href="https://casatechllc.com" target="_blank" rel="noopener noreferrer" class="group font-bold transition-colors hover:text-white">
+              <span class="text-tertiary group-hover:text-secondary transition-colors">Casatech LLC</span>
             </a>
           </p>
-          <p class="mb-0">&copy; {{ new Date().getFullYear() }} Nianza Foundation. All Rights Reserved.</p>
         </div>
       </div>
     </div>
@@ -47,52 +61,23 @@
 </template>
 
 <script setup>
-const openDonateModal = inject('openDonateModal');
+import { inject } from 'vue';
+
+// MUST match the string 'openDonateModal' from app.vue
+const openDonate = inject('openDonateModal');
+
+const handleDonateClick = () => {
+  if (openDonate) {
+    openDonate();
+  }
+};
 </script>
 
 <style scoped>
-.footer {
-  /* Ensure the footer takes the full width and contrast is good */
-  color: var(--color-text-light); 
-}
-
-.footer-logo {
-  height: 40px; 
-}
-
-.text-light-grey {
-  color: #cccccc !important;
-}
-
-.footer-link {
-  color: #cccccc !important; /* Default color for the whole link (Powered by) */
-  text-decoration: none;
-  font-weight: var(--font-weight-normal);
-  transition: var(--transition-color);
-}
-
-/* New style to highlight "Casatech LLC" specifically */
-.text-casatech-highlight {
-  /* Use the Bright Sky Blue color for a strong accent */
-  color: var(--color-secondary) !important; 
-  font-weight: var(--font-weight-bold);
-  transition: var(--transition-color);
-}
-
-/* Ensure the hover still works on the entire link */
-.footer-link:hover .text-casatech-highlight {
-  color: var(--color-accent-secondary) !important; /* Use Vibrant Green on hover */
-  text-decoration: underline;
-}
-
-/* Customizing the donate button in the footer for visual prominence */
-.btn-lg {
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-}
-
-/* Ensuring Font Awesome icons are styled */
-.list-unstyled li i {
-  color: var(--color-accent);
+/* Icon coloring specifically for brand consistency */
+.fas {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

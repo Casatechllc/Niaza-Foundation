@@ -1,42 +1,38 @@
 <template>
-  <div>
-    <AppNavbar @open-donate="openDonateModal" />
+  <div class="min-h-screen bg-slate-50 font-sans text-slate-900 antialiased overflow-x-clip">
+    <AppNavbar /> 
+    
     <main>
-      <NuxtPage @open-donate="openDonateModal"/>
+      <NuxtPage />
     </main>
-    <AppFooter @open-donate="openDonateModal" />
+    
+    <AppFooter />
 
-    <DonateModal ref="donateModalRef" />
-    <!-- <ClientOnly>
-      <CookieBanner />
-    </ClientOnly> -->
+    <DonateModal />
   </div>
 </template>
+
 <script setup>
 import '~/assets/main.css'
-import DonateModal from '~/components/DonateModal.vue';
-import { ref } from 'vue';
 
-// Ref to hold the component instance
-const donateModalRef = ref(null);
+// This creates a globally accessible reactive variable in Nuxt
+const isDonateModalOpen = useState('isDonateModalOpen', () => false);
 
-// Function to call the modal's exposed method
+// We still provide a helper function for convenience
 const openDonateModal = () => {
-  if (donateModalRef.value) {
-    donateModalRef.value.openModal();
-  }
+  isDonateModalOpen.value = true;
 };
 
-// Provide the modal function globally for components to use
 provide('openDonateModal', openDonateModal);
 </script>
+
 <style>
-/* This global style is necessary since the Navbar is fixed-top */
+/* Since your new Navbar is 'sticky', you likely don't need this padding anymore. 
+   Sticky elements don't take up space 'above' the flow like fixed elements do. */
 body {
-  padding-top: var(--spacing-top); /* This value (80px) is defined in main.css */
+  padding-top: 0; 
 }
 
-/* Style to prevent scrolling when modal is open */
 body.modal-open {
   overflow: hidden;
 }

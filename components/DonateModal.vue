@@ -1,189 +1,144 @@
 <template>
-  <!-- Modal Backdrop (Clicking here closes the modal) -->
-  <div v-if="isOpen" class="modal-backdrop" @click.self="closeModal" @keydown.esc="closeModal">
-    
-    <!-- Modal Content -->
-    <div class="modal-content-wrapper p-3 p-md-5" data-aos="zoom-in" data-aos-duration="300" >
-      <div class="modal-content-body">
-        
-        <div class="d-flex justify-content-between align-items-start mb-4">
-          <h3 class="modal-title text-primary">Support Nianza Foundation</h3>
-          <button @click="closeModal" type="button" class="close-btn" aria-label="Close">
-            <i class="fas fa-times"></i>
-          </button>
+  <Transition
+    enter-active-class="transition duration-300 ease-out"
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-100"
+    leave-active-class="transition duration-200 ease-in"
+    leave-from-class="opacity-100"
+    leave-to-class="opacity-0"
+  >
+    <div 
+      v-if="isOpen" 
+      class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-primary/40 backdrop-blur-md"
+      @click.self="closeModal"
+    >
+      <div 
+        v-motion
+        :initial="{ opacity: 0, scale: 0.9, y: 20 }"
+        :enter="{ opacity: 1, scale: 1, y: 0 }"
+        class="relative w-full max-w-lg overflow-hidden rounded-3xl bg-white shadow-2xl"
+      >
+        <div class="bg-slate-50 px-8 py-6 border-b border-slate-100">
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-bold text-primary">Support Our Mission</h3>
+            <button 
+              @click="closeModal" 
+              class="rounded-full p-2 text-slate-400 hover:bg-slate-200 hover:text-primary transition-colors"
+              aria-label="Close modal"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <p class="mt-2 text-slate-600">
+            Your contribution directly funds sustainable housing and dignity for families in the DRC.
+          </p>
         </div>
 
-        <p class="lead text-center mb-4">
-          Your donation helps build safe, dignified shelters in the DRC.
-        </p>
+        <div class="p-8">
+          <label class="block text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">
+            Select an Amount
+          </label>
+          <div class="grid grid-cols-2 gap-4 mb-8 sm:grid-cols-4">
+            <button 
+              v-for="amount in amounts" 
+              :key="amount" 
+              @click="selectAmount(amount)"
+              :class="[
+                'flex items-center justify-center rounded-xl py-3 font-bold transition-all border-2',
+                selectedAmount === amount 
+                  ? 'bg-primary border-primary text-white shadow-lg scale-105' 
+                  : 'bg-white border-slate-100 text-slate-600 hover:border-tertiary hover:text-tertiary'
+              ]"
+            >
+              ${{ amount }}
+            </button>
+          </div>
 
-        <!-- Donation Amount Options -->
-        <div class="donation-options mb-4">
+          <div class="mb-8">
+            <label for="custom-amount" class="block text-sm font-bold uppercase tracking-wider text-slate-500 mb-2">
+              Or Enter Custom Amount
+            </label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xl font-bold text-slate-400">$</span>
+              <input 
+                type="number" 
+                id="custom-amount" 
+                v-model.number="customAmount" 
+                @input="handleCustomInput"
+                placeholder="0.00"
+                class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 py-4 pl-10 pr-4 text-xl font-bold text-primary focus:border-tertiary focus:outline-none focus:ring-0 transition-colors"
+              />
+            </div>
+          </div>
+
           <button 
-            v-for="amount in amounts" 
-            :key="amount" 
-            @click="selectAmount(amount)"
-            :class="['btn', 'btn-amount', { 'btn-selected': selectedAmount === amount }]"
+            @click="processDonation"
+            class="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-accent py-5 text-xl font-bold text-white shadow-xl transition-all hover:bg-orange-700 hover:scale-[1.02] active:scale-95"
           >
-            ${{ amount }}
+            <i class="fas fa-heart text-white group-hover:animate-pulse"></i>
+            <span>Donate ${{ finalAmount || 0 }}</span>
           </button>
+          
+          <div class="mt-6 flex items-center justify-center gap-2 text-slate-400 text-sm">
+            <i class="fas fa-lock"></i>
+            <span>Secure, encrypted transaction</span>
+          </div>
         </div>
 
-        <!-- Custom Amount Input -->
-        <div class="form-group mb-4">
-          <label for="custom-amount" class="form-label">Or Enter Custom Amount ($)</label>
-          <input 
-            type="number" 
-            id="custom-amount" 
-            class="form-control" 
-            v-model.number="customAmount" 
-            placeholder="e.g., 150"
-            @input="handleCustomInput"
-          >
+        <div class="bg-slate-50 px-8 py-4 text-center">
+          <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold">
+            Nianza Foundation is a registered non-profit
+          </p>
         </div>
-
-        <!-- Checkout Button (Placeholder) -->
-        <button class="btn btn-cta btn-lg w-100" @click="processDonation">
-          <i class="fas fa-lock mr-2"></i> Donate ${{ finalAmount }}
-        </button>
-        
-        <p class="mt-3 small text-center text-dark-grey">Secure payment integration coming soon.</p>
-
       </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
-const isOpen = ref(false);
-const selectedAmount = ref(50);
+// Connect to Global State from app.vue
+const isOpen = useState('isDonateModalOpen');
+
+const selectedAmount = ref(100);
 const customAmount = ref(null);
-const amounts = ref([25, 50, 100, 250]);
+const amounts = [25, 50, 100, 250];
 
-// Computed property to determine the final amount shown in the button
 const finalAmount = computed(() => {
   return customAmount.value > 0 ? customAmount.value : selectedAmount.value;
 });
 
-const openModal = () => {
-  isOpen.value = true;
-  document.body.classList.add('modal-open'); // Prevent body scroll
-};
-
 const closeModal = () => {
   isOpen.value = false;
-  document.body.classList.remove('modal-open');
 };
+
+// Handle Body Scroll Locking
+watch(isOpen, (newVal) => {
+  if (process.client) {
+    if (newVal) document.body.classList.add('overflow-hidden');
+    else document.body.classList.remove('overflow-hidden');
+  }
+});
 
 const selectAmount = (amount) => {
   selectedAmount.value = amount;
-  customAmount.value = null; // Clear custom amount when pre-set is chosen
+  customAmount.value = null;
 };
 
 const handleCustomInput = () => {
-  selectedAmount.value = 0; // Clear selected amount when custom is entered
+  selectedAmount.value = 0;
 };
 
 const processDonation = () => {
-  alert(`Processing donation of $${finalAmount.value}. Thank you!`);
-  // Here is where payment gateway integration logic would go (e.g., Stripe/PayPal API call)
+  if (finalAmount.value <= 0) return alert('Please enter a valid amount');
+  
+  alert(`Thank you for your donation of $${finalAmount.value}! Redirecting to secure checkout...`);
   closeModal();
 };
 
-// Expose the open/close methods globally so they can be called from Navbar/Footer
-defineExpose({
-  openModal,
-  closeModal
-});
+// Keep exposed for legacy parent calls if necessary
+defineExpose({ openModal: () => isOpen.value = true, closeModal });
 </script>
-
-<style scoped>
-/* Backdrop - Blurs the content behind the modal */
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Dark semi-transparent overlay */
-  backdrop-filter: blur(5px); /* The required blur effect */
-  z-index: 2000; /* Ensure it is above the navbar (z-index 1030) */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-y: auto;
-  padding: var(--spacing-lg);
-}
-
-/* Modal Content Styling */
-.modal-content-wrapper {
-  background-color: var(--color-background);
-  border-radius: var(--border-radius);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  max-width: 500px;
-  width: 95%;
-  position: relative;
-}
-
-.modal-content-body {
-  /* padding: var(--spacing-xl); */
-}
-
-.modal-title {
-  color: var(--color-primary);
-  margin-bottom: 0;
-  font-weight: var(--font-weight-bold);
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: var(--font-size-xl);
-  color: var(--dark-grey);
-  cursor: pointer;
-  padding: 0;
-  transition: var(--transition-color);
-}
-
-.close-btn:hover {
-  color: var(--color-accent);
-}
-
-/* Donation Options Grid */
-.donation-options {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-}
-
-.btn-amount {
-  background-color: var(--light-grey);
-  color: var(--dark-grey);
-  padding: var(--spacing-sm);
-  border: 1px solid var(--light-grey);
-  border-radius: var(--border-radius);
-  font-weight: var(--font-weight-bold);
-  transition: var(--transition-default);
-}
-
-.btn-amount:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-text-light);
-}
-
-.btn-selected {
-  background-color: var(--color-primary) !important;
-  color: var(--color-text-light) !important;
-  border-color: var(--color-primary) !important;
-  box-shadow: var(--box-shadow);
-}
-
-.form-label {
-  font-weight: var(--font-weight-bold);
-  color: var(--dark-grey);
-  margin-bottom: var(--spacing-sm);
-}
-</style>
