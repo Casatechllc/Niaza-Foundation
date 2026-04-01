@@ -1,33 +1,40 @@
 <template>
-  <section class="relative w-full overflow-hidden flex flex-col items-center select-none pointer-events-none">
-    
-    <div class="relative w-full max-w-7xl h-[550px] sm:h-[700px] flex items-center justify-center perspective-1200">
+  <section 
+    class="relative w-full overflow-hidden flex flex-col items-center select-none pointer-events-none"
+    @mousedown="handleDragStart"
+    @mousemove="handleDragMove"
+    @mouseup="handleDragEnd"
+    @mouseleave="handleDragEnd"
+    @touchstart="handleTouchStart"
+    @touchmove="handleTouchMove"
+    @touchend="handleTouchEnd"
+  >
+    <div class="relative w-full max-w-7xl h-[600px] sm:h-[750px] flex items-center justify-center perspective-1200">
       
       <div 
         v-for="(item, index) in products" 
         :key="item.id"
-        class="absolute transition-all duration-700 cubic-bezier group"
+        class="absolute transition-all duration-700 cubic-bezier cursor-pointer group"
         :style="getCardStyle(index)"
+        @click.capture="handleCardClick(index)"
       >
         <div 
           v-if="activeIndex !== index"
-          @click="setFocus(index)"
-          class="absolute inset-y-0 -inset-x-16 z-50 bg-transparent cursor-pointer pointer-events-auto"
+          class="absolute inset-y-0 -inset-x-24 z-50 bg-transparent"
         ></div>
 
-        <div 
-          class="w-[280px] sm:w-[420px] drop-shadow-2xl relative z-10 transition-opacity duration-500"
-          :class="activeIndex === index ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-60'"
-        >
+        <div class="w-[280px] sm:w-[420px] drop-shadow-2xl relative z-10 pointer-events-auto">
           <MerchCard 
             :product="item" 
             @add-to-cart="$emit('add-to-cart', $event)"
+            :class="[activeIndex === index ? 'opacity-100' : 'pointer-events-none opacity-60 hover:opacity-100 transition-opacity']"
           />
         </div>
       </div>
+
     </div>
 
-    <div class="flex flex-col items-center pointer-events-auto pt-8">
+    <div class="flex flex-col items-center">
       <div class="flex items-center gap-6">
         <button @click="prev" class="p-4 rounded-full border border-white/5 bg-white/5 hover:border-amber-500 text-amber-500 transition-all active:scale-90">
           <i class="fas fa-chevron-left"></i>
@@ -104,43 +111,43 @@ const prev = () => {
 
 // --- AXIS-AWARE INTERACTION LOGIC ---
 
-// const handleInteractionStart = (x, y) => {
-//   isDragging.value = true;
-//   startX.value = x;
-//   startY.value = y;
-// };
+const handleInteractionStart = (x, y) => {
+  isDragging.value = true;
+  startX.value = x;
+  startY.value = y;
+};
 
-// const handleInteractionMove = (x, y) => {
-//   if (!isDragging.value) return;
+const handleInteractionMove = (x, y) => {
+  if (!isDragging.value) return;
 
-//   const diffX = startX.value - x;
-//   const diffY = startY.value - y;
+  const diffX = startX.value - x;
+  const diffY = startY.value - y;
 
-//   /**
-//    * If the vertical movement (diffY) is greater than horizontal (diffX),
-//    * the user is trying to scroll the page. We kill the drag state 
-//    * to let the browser take over the scroll.
-//    */
-//   if (Math.abs(diffY) > Math.abs(diffX)) {
-//     isDragging.value = false;
-//     return;
-//   }
+  /**
+   * If the vertical movement (diffY) is greater than horizontal (diffX),
+   * the user is trying to scroll the page. We kill the drag state 
+   * to let the browser take over the scroll.
+   */
+  if (Math.abs(diffY) > Math.abs(diffX)) {
+    isDragging.value = false;
+    return;
+  }
 
-//   // Horizontal swipe threshold
-//   if (Math.abs(diffX) > 60) {
-//     if (diffX > 0) next();
-//     else prev();
-//     isDragging.value = false;
-//   }
-// };
+  // Horizontal swipe threshold
+  if (Math.abs(diffX) > 60) {
+    if (diffX > 0) next();
+    else prev();
+    isDragging.value = false;
+  }
+};
 
-// const handleDragStart = (e) => handleInteractionStart(e.pageX, e.pageY);
-// const handleDragMove = (e) => handleInteractionMove(e.pageX, e.pageY);
-// const handleDragEnd = () => { isDragging.value = false; };
+const handleDragStart = (e) => handleInteractionStart(e.pageX, e.pageY);
+const handleDragMove = (e) => handleInteractionMove(e.pageX, e.pageY);
+const handleDragEnd = () => { isDragging.value = false; };
 
-// const handleTouchStart = (e) => handleInteractionStart(e.touches[0].clientX, e.touches[0].clientY);
-// const handleTouchMove = (e) => handleInteractionMove(e.touches[0].clientX, e.touches[0].clientY);
-// const handleTouchEnd = () => { isDragging.value = false; };
+const handleTouchStart = (e) => handleInteractionStart(e.touches[0].clientX, e.touches[0].clientY);
+const handleTouchMove = (e) => handleInteractionMove(e.touches[0].clientX, e.touches[0].clientY);
+const handleTouchEnd = () => { isDragging.value = false; };
 </script>
 
 <style scoped>
@@ -154,6 +161,6 @@ const prev = () => {
 }
 
 section {
-  touch-action: auto;
+  touch-action: pan-y;
 }
 </style>
