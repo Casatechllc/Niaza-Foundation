@@ -3,12 +3,7 @@
     <div class="mx-auto max-w-[1440px] px-6 lg:px-0">
       <div class="grid grid-cols-1 lg:grid-cols-12 lg:items-center">
         
-        <div class="relative z-10 py-16 sm:py-24 lg:col-span-7 lg:py-24 lg:pl-12 lg:pr-16 xl:pl-24 min-w-0">
-          <img 
-            src="/logo.png" 
-            alt="Nianza Foundation Logo" 
-            class="mb-10 h-16 w-auto object-contain sm:h-20"
-          />
+        <div class="relative z-10 py-16 sm:py-24 lg:col-span-7 lg:py-24 lg:pl-12 lg:pr-16 xl:py-48 min-w-0">
 
           <h1 class="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl xl:text-6xl lg:leading-[1.1]">
             A Call for Partnership: 
