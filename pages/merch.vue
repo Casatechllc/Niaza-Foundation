@@ -9,7 +9,7 @@
         <section 
           v-for="(items, category) in groupedProducts" 
           :key="category"
-          v-motion-slide-visible-once-bottom 
+          v-motion-slide-visible-once-left
           class="space-y-12 min-h-[400px]"
         >
           <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-8">
