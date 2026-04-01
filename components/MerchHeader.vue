@@ -26,12 +26,12 @@
 
       <div class="xl:col-span-7 relative">
         <MerchCarousel 
-          :products="featuredProducts" 
-          activeCategory="Limited Sweatshirts"
-          @add-to-cart="handleCartAction" 
-          class="w-full xl:-ml-12"
+            :products="featuredProducts" 
+            activeCategory="Limited Sweatshirts"
+            @add-to-cart="handleCartAction" 
+            class="w-full xl:-ml-12 relative z-10"
         />
-      </div>
+        </div>
 
     </div>
   </div>

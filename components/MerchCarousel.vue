@@ -1,32 +1,33 @@
 <template>
-  <section 
-    class="relative w-full overflow-hidden flex flex-col items-center select-none pointer-events-none" >
-    <div class="relative w-full max-w-7xl h-[600px] sm:h-[750px] flex items-center justify-center perspective-1200">
+  <section class="relative w-full overflow-hidden flex flex-col items-center select-none pointer-events-none">
+    
+    <div class="relative w-full max-w-7xl h-[550px] sm:h-[700px] flex items-center justify-center perspective-1200">
       
       <div 
         v-for="(item, index) in products" 
         :key="item.id"
-        class="absolute transition-all duration-700 cubic-bezier cursor-pointer group"
+        class="absolute transition-all duration-700 cubic-bezier group"
         :style="getCardStyle(index)"
-        @click.capture="handleCardClick(index)"
       >
         <div 
           v-if="activeIndex !== index"
-          class="absolute inset-y-0 -inset-x-24 z-50 bg-transparent"
+          @click="setFocus(index)"
+          class="absolute inset-y-0 -inset-x-16 z-50 bg-transparent cursor-pointer pointer-events-auto"
         ></div>
 
-        <div class="w-[280px] sm:w-[420px] drop-shadow-2xl relative z-10 pointer-events-auto">
+        <div 
+          class="w-[280px] sm:w-[420px] drop-shadow-2xl relative z-10 transition-opacity duration-500"
+          :class="activeIndex === index ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-60'"
+        >
           <MerchCard 
             :product="item" 
             @add-to-cart="$emit('add-to-cart', $event)"
-            :class="[activeIndex === index ? 'opacity-100' : 'pointer-events-none opacity-60 hover:opacity-100 transition-opacity']"
           />
         </div>
       </div>
-
     </div>
 
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center pointer-events-auto pt-8">
       <div class="flex items-center gap-6">
         <button @click="prev" class="p-4 rounded-full border border-white/5 bg-white/5 hover:border-amber-500 text-amber-500 transition-all active:scale-90">
           <i class="fas fa-chevron-left"></i>
@@ -153,6 +154,6 @@ const prev = () => {
 }
 
 section {
-  touch-action: pan-y;
+  touch-action: auto;
 }
 </style>
