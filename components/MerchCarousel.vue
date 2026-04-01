@@ -1,5 +1,14 @@
 <template>
-  <section class="relative w-full overflow-hidden flex flex-col items-center select-none">
+  <section 
+    class="relative w-full overflow-hidden flex flex-col items-center select-none pointer-events-none"
+    @mousedown="handleDragStart"
+    @mousemove="handleDragMove"
+    @mouseup="handleDragEnd"
+    @mouseleave="handleDragEnd"
+    @touchstart="handleTouchStart"
+    @touchmove="handleTouchMove"
+    @touchend="handleTouchEnd"
+  >
     <div class="relative w-full max-w-7xl h-[600px] sm:h-[750px] flex items-center justify-center perspective-1200">
       
       <div 
