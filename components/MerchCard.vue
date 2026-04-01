@@ -1,7 +1,7 @@
 <template>
   <div 
     v-motion-slide-visible-bottom
-    class="group relative flex flex-col rounded-3xl bg-primary border border-white/5 p-4 transition-all hover:border-amber-500/30 hover:shadow-2xl hover:shadow-amber-500/5"
+    class="group relative flex flex-col rounded-3xl bg-primary border border-white/5 p-4 transition-all hover:border-amber-500/30 hover:shadow-2xl select-none touch-pan-y"
   >
     <div class="aspect-square w-full overflow-hidden rounded-2xl bg-[#1c1f26] relative">
       <transition name="fade" mode="out-in">
