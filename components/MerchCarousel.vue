@@ -69,9 +69,10 @@ const props = defineProps({
 const emit = defineEmits(['add-to-cart']);
 const activeIndex = ref(0);
 
-// Drag State
+// Interaction State
 const isDragging = ref(false);
 const startX = ref(0);
+const startY = ref(0); // Track vertical start to separate scroll from swipe
 
 const getCardStyle = (index) => {
   const diff = index - activeIndex.value;
@@ -84,7 +85,6 @@ const getCardStyle = (index) => {
   return {
     zIndex: 100 - absDiff,
     transform: `translateX(${xOffset}%) translateZ(${zOffset}px) rotateY(${rotation}deg)`,
-    // Increased visibility threshold (up to 3 cards on each side now visible)
     opacity: absDiff > 4 ? 0 : 1 - (absDiff * 0.2), 
     filter: absDiff === 0 ? 'brightness(1)' : `brightness(${1 - absDiff * 0.15}) blur(${absDiff * 0.5}px)`,
     visibility: absDiff > 4 ? 'hidden' : 'visible'
@@ -109,29 +109,45 @@ const prev = () => {
   activeIndex.value = (activeIndex.value - 1 + props.products.length) % props.products.length;
 };
 
-// Drag/Swipe Handlers
-const handleInteractionStart = (x) => {
+// --- AXIS-AWARE INTERACTION LOGIC ---
+
+const handleInteractionStart = (x, y) => {
   isDragging.value = true;
   startX.value = x;
+  startY.value = y;
 };
 
-const handleInteractionMove = (x) => {
+const handleInteractionMove = (x, y) => {
   if (!isDragging.value) return;
-  const diff = startX.value - x;
-  if (Math.abs(diff) > 80) {
-    if (diff > 0) next();
+
+  const diffX = startX.value - x;
+  const diffY = startY.value - y;
+
+  /**
+   * If the vertical movement (diffY) is greater than horizontal (diffX),
+   * the user is trying to scroll the page. We kill the drag state 
+   * to let the browser take over the scroll.
+   */
+  if (Math.abs(diffY) > Math.abs(diffX)) {
+    isDragging.value = false;
+    return;
+  }
+
+  // Horizontal swipe threshold
+  if (Math.abs(diffX) > 60) {
+    if (diffX > 0) next();
     else prev();
     isDragging.value = false;
   }
 };
 
-const handleDragStart = (e) => handleInteractionStart(e.pageX);
-const handleDragMove = (e) => handleInteractionMove(e.pageX);
-const handleDragEnd = () => isDragging.value = false;
+const handleDragStart = (e) => handleInteractionStart(e.pageX, e.pageY);
+const handleDragMove = (e) => handleInteractionMove(e.pageX, e.pageY);
+const handleDragEnd = () => { isDragging.value = false; };
 
-const handleTouchStart = (e) => handleInteractionStart(e.touches[0].clientX);
-const handleTouchMove = (e) => handleInteractionMove(e.touches[0].clientX);
-const handleTouchEnd = () => isDragging.value = false;
+const handleTouchStart = (e) => handleInteractionStart(e.touches[0].clientX, e.touches[0].clientY);
+const handleTouchMove = (e) => handleInteractionMove(e.touches[0].clientX, e.touches[0].clientY);
+const handleTouchEnd = () => { isDragging.value = false; };
 </script>
 
 <style scoped>
@@ -142,5 +158,9 @@ const handleTouchEnd = () => isDragging.value = false;
 
 .cubic-bezier {
   transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+section {
+  touch-action: pan-y;
 }
 </style>
