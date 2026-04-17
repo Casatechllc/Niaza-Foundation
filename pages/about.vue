@@ -63,7 +63,7 @@
                 <div class="absolute -inset-4 rounded-[40px] bg-gradient-to-tr from-secondary/30 to-transparent blur-2xl"></div>
                 
                 <img 
-                  src="/images/founder-image0.jpg" 
+                  src="/images/founder-image.jpg" 
                   alt="Charles Niansa - Founder" 
                   class="relative w-full aspect-[4/5] rounded-[40px] object-cover object-[center_15%] border-2 border-white/20 shadow-2xl transform-gpu scale-[1.01]" 
                   style="image-rendering: -webkit-optimize-contrast; backface-visibility: hidden;"
