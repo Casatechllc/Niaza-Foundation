@@ -3,10 +3,18 @@
 
 @layer base {
   :root {
-    --primary: #12122b;
+    /* --primary: #12122b;
     --secondary: #1e7b34;
     --tertiary: #008bb2;
-    --accent: #f97316;
+    --accent: #f97316; */
+
+    --primary: #0A0C10;    /* Deep Matte Black */
+  --secondary: #cead1c;  /* Signature Gold (matches logo) */
+  --tertiary: #C22415;   /* Deep DRC Forest Green */
+  --accent: #FFF8E3;     /* Soft Silver/Grey for secondary text */
+  
+  /* Use this for your CTA buttons to make them look like the logo */
+  --gold-gradient: linear-gradient(135deg, #f3d081 0%, #c5a059 50%, #947231 100%);
   }
 }
 

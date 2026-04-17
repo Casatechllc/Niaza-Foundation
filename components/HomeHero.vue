@@ -17,7 +17,7 @@
           <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
             <button 
               @click="handleDonateClick"
-              class="group relative inline-flex items-center justify-center rounded-full bg-accent px-8 py-4 text-base font-bold text-white shadow-md transition-all hover:bg-accent-hover hover:shadow-lg active:scale-95"
+              class="group relative inline-flex items-center justify-center rounded-full bg-tertiary px-8 py-4 text-base font-bold text-white shadow-md transition-all hover:bg-tertiary/80 hover:shadow-lg active:scale-95"
             >
               <span>Partner With Us</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

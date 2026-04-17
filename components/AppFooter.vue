@@ -21,7 +21,7 @@
           <h5 class="text-secondary font-bold uppercase tracking-widest text-sm mb-6">Join Our Mission</h5>
           <button 
             @click="handleDonateClick"
-            class="group inline-flex items-center gap-3 rounded-full bg-accent px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:bg-orange-700 hover:scale-105 active:scale-95"
+            class="group inline-flex items-center gap-3 rounded-full bg-secondary/90 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all hover:bg-secondary/80 hover:scale-105 active:scale-95"
           >
             <i class="fas fa-hand-holding-heart"></i>
             <span>Donate Now</span>
@@ -51,7 +51,7 @@
           <p class="text-sm text-slate-500">
             Powered by 
             <a href="https://casatechllc.com" target="_blank" rel="noopener noreferrer" class="group font-bold transition-colors hover:text-white">
-              <span class="text-tertiary group-hover:text-secondary transition-colors">Casatech LLC</span>
+              <span class="text-tertiary group-hover:text-tertiary/80 transition-colors">Casatech LLC</span>
             </a>
           </p>
         </div>

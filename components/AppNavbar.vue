@@ -76,7 +76,7 @@
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <button 
           @click="handleDonateClick"
-          class="rounded-full bg-accent px-6 py-2.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-accent/90 hover:shadow-md active:scale-95"
+          class="rounded-full bg-tertiary px-6 py-2.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-tertiary/80 hover:shadow-md active:scale-95"
         >
           Partner With Us
         </button>
@@ -166,6 +166,6 @@ const handleDonateClick = () => {
 }
 
 .btn-donate {
-  @apply rounded-full bg-accent px-6 py-3 text-center text-base font-bold text-white shadow-lg active:scale-95;
+  @apply rounded-full bg-tertiary px-6 py-3 text-center text-base font-bold text-white shadow-lg active:scale-95;
 }
 </style>

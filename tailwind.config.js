@@ -3,11 +3,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary': '#12122b',   // The Deep Navy from your text
-        'secondary': '#1e7b34', // The vibrant Forest Green
-        'tertiary': '#008bb2',  // The Teal/Blue highlight
-        'accent': '#f97316',    // A bold orange for "Partner With Us" (High conversion)
-        'accent-hover': '#ea580c',
+        'primary': '#0A0C10',   // The Deep Navy from your text
+        'secondary': '#C5A059', // The vibrant Forest Green
+        'tertiary': '#1A2F23',  // The Teal/Blue highlight
+        'accent': '#E5E7EB',    // A bold orange for "Partner With Us" (High conversion)
+        'accent-hover': '#a8823a',
       }
     }
   }

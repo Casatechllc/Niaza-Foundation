@@ -24,7 +24,7 @@
             :visible="{ opacity: 1, x: 0 }"
             class="order-2 lg:order-1"
           >
-            <h2 class="text-amber-600 font-bold uppercase tracking-widest text-sm mb-2">Continuing the Legacy</h2>
+            <h2 class="text-tertiary font-bold uppercase tracking-widest text-sm mb-2">Continuing the Legacy</h2>
             <h3 class="text-3xl font-bold text-primary mb-6">Charly Mumbere Nianza</h3>
             <div class="space-y-6 text-lg leading-relaxed text-slate-700">
               <p>
@@ -33,6 +33,7 @@
               <p>
                 A former 2005 Rockingham County & Harrisonburg Boys and Girls Club "Youth of the Year," Charly has made it his mission to bring the foundation to the public here in the United States, ensuring the flame his father started continues to burn bright for those less fortunate.
               </p>
+              
             </div>
           </div>
           <div class="order-1 lg:order-2 flex justify-center" v-motion-pop-visible>
@@ -78,7 +79,7 @@
             <div class="lg:col-span-7 text-white">
               <div class="space-y-6">
                 <div class="space-y-2">
-                  <h2 class="text-amber-500 font-bold uppercase tracking-widest text-sm">The Founder</h2>
+                  <h2 class="text-tertiary font-bold uppercase tracking-widest text-sm">The Founder</h2>
                   <h3 class="text-5xl sm:text-6xl font-black text-white leading-tight">
                     Charles <span class="text-secondary italic">Niansa</span>
                   </h3>
@@ -89,7 +90,7 @@
                 </p>
                 
                 <div class="relative mt-10">
-                  <i class="fas fa-quote-left absolute -top-4 -left-4 text-4xl text-secondary opacity-30"></i>
+                  <i class="fas fa-quote-left absolute -top-4 -left-4 text-4xl text-tertiary opacity-30"></i>
                   <div class="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-inner">
                     <p class="text-lg sm:text-xl italic text-slate-100 leading-relaxed">
                       "I’m not a perfect man, but I understand that when someone needs help, even if it is your last piece of bread, it can be shared. After consuming that bread followed by water, we live to fight another day."
@@ -148,7 +149,7 @@
         </p>
         <button 
           @click="openDonate" 
-          class="inline-flex items-center gap-3 rounded-full bg-accent px-10 py-5 text-xl font-bold text-white shadow-xl transition-all hover:bg-orange-700 hover:scale-105 active:scale-95"
+          class="inline-flex items-center gap-3 rounded-full bg-accent px-10 py-5 text-xl font-bold text-tertiary shadow-xl transition-all hover:bg-tertiary hover:text-accent hover:scale-105 active:scale-95"
         >
           <i class="fas fa-dollar-sign"></i>
           <span>Donate to Our Cause</span>

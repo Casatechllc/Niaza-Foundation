@@ -129,7 +129,7 @@
               </p>
               <button 
                 @click="handleDonateClick"
-                class="inline-flex justify-center rounded-full bg-accent px-8 py-4 text-base font-bold text-white shadow-lg hover:bg-orange-700 hover:scale-105 transition-all active:scale-95"
+                class="inline-flex justify-center rounded-full bg-tertiary px-8 py-4 text-base font-bold text-slate-300 shadow-lg hover:bg-accent hover:text-tertiary hover:scale-105 transition-all active:scale-95"
               >
                 Support Our Vision Today
               </button>
