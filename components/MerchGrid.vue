@@ -13,21 +13,27 @@
           class="group relative flex flex-col"
           v-motion-pop-visible
         >
-          <div class="aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-slate-100 border border-slate-100 relative">
+          <div class="aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-slate-100 border border-slate-100 relative group cursor-pointer">
             <img 
-              :src="product.mainImage" 
-              :alt="product.name" 
-              class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-            />
-            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-primary/20 backdrop-blur-[2px]">
-              <button 
                 @click="selectedProduct = product"
-                class="bg-white text-primary font-black uppercase text-xs tracking-widest px-6 py-3 rounded-full shadow-xl hover:bg-secondary hover:text-white transition-colors"
-              >
+                :src="product.mainImage" 
+                :alt="product.name" 
+                class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+            />
+
+            <div 
+                @click="selectedProduct = product"
+                class="absolute inset-0 flex items-end justify-center p-8 
+                    opacity-100 md:opacity-0 md:group-hover:opacity-100 
+                    transition-opacity duration-300 bg-gradient-to-t from-primary/60 via-transparent to-transparent md:bg-primary/20 md:backdrop-blur-[2px]"
+            >
+                <button 
+                class="w-full md:w-auto bg-white text-primary font-black uppercase text-xs tracking-widest px-6 py-4 md:py-3 rounded-2xl md:rounded-full shadow-xl hover:bg-secondary hover:text-white transition-all transform md:translate-y-4 md:group-hover:translate-y-0"
+                >
                 Select {{ product.category }}
-              </button>
+                </button>
             </div>
-          </div>
+           </div>
 
           <div class="mt-6">
             <div class="flex justify-between items-start">
@@ -61,6 +67,31 @@
 <script setup>
 import { products } from '~/data/merch.js';
 const selectedProduct = ref(null);
+// Watch for when a product is selected
+watch(selectedProduct, (newVal) => {
+  if (newVal) {
+    // 1. Add a dummy entry to the browser history
+    window.history.pushState({ detailsOpen: true }, '');
+    
+    // 2. Listen for the browser "Back" button event
+    window.addEventListener('popstate', handleBackNavigation);
+  } else {
+    // Clean up the listener if closed manually
+    window.removeEventListener('popstate', handleBackNavigation);
+  }
+});
+
+const handleBackNavigation = () => {
+  // When the user hits the back button, close the component
+  selectedProduct.value = null;
+  // Stop listening
+  window.removeEventListener('popstate', handleBackNavigation);
+};
+
+// Ensure listener is removed if the whole page is destroyed
+onUnmounted(() => {
+  window.removeEventListener('popstate', handleBackNavigation);
+});
 </script>
 
 <style scoped>

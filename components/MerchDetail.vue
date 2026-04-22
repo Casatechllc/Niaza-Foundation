@@ -3,6 +3,12 @@
     <button @click="$emit('close')" class="flex items-center gap-2 text-slate-400 hover:text-primary transition-colors mb-12 uppercase text-xs font-black tracking-widest">
       <i class="fas fa-arrow-left"></i> Back to Collection
     </button>
+    <button 
+    @click="$emit('close')" 
+    class="fixed top-30 right-6 z-100 h-12 w-12 flex items-center justify-center bg-primary/80 p-0 m-0 backdrop-blur-md p-4 rounded-full shadow-lg md:hidden"
+    >
+    <i class="fas fa-times text-secondary"></i>
+    </button>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
       
