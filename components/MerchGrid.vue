@@ -53,30 +53,49 @@
         </div>
       </div>
     </div>
-
-    <transition name="fade-slide" mode="out-in">
-      <MerchDetail 
-        v-if="selectedProduct" 
-        :product="selectedProduct" 
-        @close="selectedProduct = null" 
-      />
-    </transition>
+    <div ref="detailRef">
+        <transition name="fade-slide" mode="out-in">
+        <MerchDetail 
+            v-if="selectedProduct" 
+            :product="selectedProduct" 
+            @close="selectedProduct = null" 
+        />
+        </transition>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { products } from '~/data/merch.js';
+import { nextTick, ref, watch, onUnmounted } from 'vue';
 const selectedProduct = ref(null);
+const detailRef = ref(null); // Create a ref for the container
+const gridScrollPos = ref(0);
 // Watch for when a product is selected
-watch(selectedProduct, (newVal) => {
+watch(selectedProduct, async (newVal) => {
   if (newVal) {
-    // 1. Add a dummy entry to the browser history
-    window.history.pushState({ detailsOpen: true }, '');
+    // 1. SAVE the current scroll position before jumping
+    gridScrollPos.value = window.pageYOffset;
+
+    await nextTick();
     
-    // 2. Listen for the browser "Back" button event
+    if (detailRef.value) {
+      const elementTop = detailRef.value.offsetTop;
+      window.scrollTo({
+        top: elementTop - 70,
+        behavior: 'smooth'
+      });
+    }
+
+    window.history.pushState({ detailsOpen: true }, '');
     window.addEventListener('popstate', handleBackNavigation);
   } else {
-    // Clean up the listener if closed manually
+    // 2. SCROLL BACK to the saved position when newVal is null (closed)
+    window.scrollTo({
+      top: gridScrollPos.value,
+      behavior: 'smooth'
+    });
+
     window.removeEventListener('popstate', handleBackNavigation);
   }
 });
