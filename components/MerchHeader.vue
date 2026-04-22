@@ -8,15 +8,15 @@
         class="xl:col-span-5 z-20 text-center xl:text-left space-y-6"
       >
         <h1 class="text-6xl sm:text-7xl xl:text-8xl font-extrabold tracking-tight text-slate-100 uppercase italic leading-[0.9]">
-          Wear Your <span class="text-amber-500 xl:block drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]">Impact</span>
+          Wear Your <span class="text-secondary xl:block drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]">Impact</span>
         </h1>
         
-        <div class="h-1 w-12 bg-amber-500 mx-auto xl:mx-0 my-6"></div>
+        <div class="h-1 w-12 bg-secondary mx-auto xl:mx-0 my-6"></div>
         
         <div class="max-w-md mx-auto xl:mx-0 space-y-4">
           <p class="text-lg sm:text-xl font-bold text-slate-400 leading-snug">
             Every thread tells a story of 
-            <span class="underline decoration-amber-500/50 underline-offset-4">resilience</span>.
+            <span class="underline decoration-secondary/50 underline-offset-4">resilience</span>.
           </p>
           <p class="text-sm sm:text-base text-slate-400 leading-relaxed italic opacity-80">
             100% of profits are funneled directly into our sustainable shelter projects in the DRC.

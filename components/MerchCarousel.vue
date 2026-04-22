@@ -37,7 +37,7 @@
 
     <div class="flex flex-col items-center pointer-events-auto z-50">
       <div class="flex items-center gap-6">
-        <button @click="prev" class="p-4 rounded-full border border-white/5 bg-white/5 hover:border-amber-500 text-amber-500 transition-all active:scale-90">
+        <button @click="prev" class="p-4 rounded-full border border-white/5 bg-white/5 hover:border-secondary text-secondary transition-all active:scale-90">
           <i class="fas fa-chevron-left"></i>
         </button>
         
@@ -46,11 +46,11 @@
             v-for="(_, i) in products" :key="i"
             @click="setFocus(i)"
             class="h-1.5 transition-all duration-500 rounded-full"
-            :class="activeIndex === i ? 'w-10 bg-amber-500' : 'w-3 bg-white/20'"
+            :class="activeIndex === i ? 'w-10 bg-secondary' : 'w-3 bg-white/20'"
           ></button>
         </div>
 
-        <button @click="next" class="p-4 rounded-full border border-white/5 bg-white/5 hover:border-amber-500 text-amber-500 transition-all active:scale-90">
+        <button @click="next" class="p-4 rounded-full border border-white/5 bg-white/5 hover:border-secondary text-secondary/80 transition-all active:scale-90">
           <i class="fas fa-chevron-right"></i>
         </button>
       </div>

@@ -18,7 +18,7 @@
         :enter="{ opacity: 1, scale: 1, y: 0 }"
         class="relative w-full max-w-lg overflow-hidden rounded-3xl bg-white shadow-2xl"
       >
-        <div class="bg-slate-50 px-8 py-6 border-b border-slate-100">
+        <div class="bg-accent px-8 py-6 border-b border-secondary/20">
           <div class="flex items-center justify-between">
             <h3 class="text-2xl font-bold text-primary">Support Our Mission</h3>
             <button 
@@ -48,8 +48,8 @@
               :class="[
                 'flex items-center justify-center rounded-xl py-3 font-bold transition-all border-2',
                 selectedAmount === amount 
-                  ? 'bg-primary border-primary text-white shadow-lg scale-105' 
-                  : 'bg-white border-slate-100 text-slate-600 hover:border-tertiary hover:text-tertiary'
+                  ? 'bg-accent border-accent text-primary shadow-lg scale-105' 
+                  : 'bg-white border-secondary/20 text-slate-600 hover:border-secondary/70 hover:text-secondary'
               ]"
             >
               ${{ amount }}
@@ -68,16 +68,16 @@
                 v-model.number="customAmount" 
                 @input="handleCustomInput"
                 placeholder="0.00"
-                class="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 py-4 pl-10 pr-4 text-xl font-bold text-primary focus:border-tertiary focus:outline-none focus:ring-0 transition-colors"
+                class="w-full rounded-2xl border-2 border-secondary/20 bg-slate-50 py-4 pl-10 pr-4 text-xl font-bold text-primary focus:border-secondary focus:outline-none focus:ring-0 transition-colors"
               />
             </div>
           </div>
 
           <button 
             @click="processDonation"
-            class="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-accent py-5 text-xl font-bold text-white shadow-xl transition-all hover:bg-orange-700 hover:scale-[1.02] active:scale-95"
+            class="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-accent/80 py-5 text-xl font-bold text-primary shadow-xl transition-all hover:bg-accent  hover:scale-[1.02] active:scale-95"
           >
-            <i class="fas fa-heart text-white group-hover:animate-pulse"></i>
+            <i class="fas fa-heart text-tertiary group-hover:animate-pulse"></i>
             <span>Donate ${{ finalAmount || 0 }}</span>
           </button>
           
