@@ -141,6 +141,8 @@
           </div>
         </div>
       </section>
+
+      <ServicesSection/>
       
       <footer class="text-center py-12" v-motion-slide-visible-bottom>
         <h3 class="text-3xl font-bold text-primary mb-4">Become a Partner in Building Hope</h3>

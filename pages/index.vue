@@ -33,6 +33,8 @@
         </div>
       </section>
 
+      <AnnouncementSection />
+
       <section class="bg-primary py-24 sm:py-32 text-white">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
           <div class="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
