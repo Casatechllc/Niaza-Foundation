@@ -9,8 +9,8 @@ export const products = [
     impact: "Provides 1 week of water",
     mainImage: "/merch/hoodie-black-3.png",
     colors: [
-      { colorName: "Black", hex: "#1f2937", image: "/merch/hoodie-main-black.png" },
-      { colorName: "Navy", hex: "#1d273a", image: "/merch/hoodie-main-navy.png" },
+      { colorName: "Black", hex: "#1c1f24", image: "/merch/hoodie-main-black.png" },
+      { colorName: "Navy", hex: "#263f6d", image: "/merch/hoodie-main-navy.png" },
       { colorName: "Cream", hex: "#d7c8b0", image: "/merch/hoodie-main-tan.png" },
       { colorName: "Maroon", hex: "#51272b", image: "/merch/hoodie-main-maroon.png" }
     ],
@@ -30,8 +30,8 @@ export const products = [
     impact: "Provides 1 week of water",
     mainImage: "/merch/t-shirt_main_navy.png",
     colors: [
-      { colorName: "Black", hex: "#0f0f0f", image: "/merch/t-shirt_main.png" },
-      { colorName: "Navy", hex: "#1d273a", image: "/merch/t-shirt_main_navy.png" },
+      { colorName: "Black", hex: "#1c1f24", image: "/merch/t-shirt_main.png" },
+      { colorName: "Navy", hex: "#263f6d", image: "/merch/t-shirt_main_navy.png" },
       { colorName: "Cream", hex: "#d7c8b0", image: "/merch/t-shirt_main_tan.png" },
       { colorName: "Maroon", hex: "#51272b", image: "/merch/t-shirt_main_maroon.png" }
     ],
@@ -52,7 +52,7 @@ export const products = [
     mainImage: "/merch/sweater-main-gray.png",
     colors: [
       { colorName: "Gray", hex: "#cdd0d3", image: "/merch/sweater-main-gray.png" },
-      { colorName: "Black", hex: "#0f0f0f", image: "/merch/sweater-main-black.png" },
+      { colorName: "Black", hex: "#1c1f24", image: "/merch/sweater-main-black.png" },
       { colorName: "Navy", hex: "#263f6d", image: "/merch/sweater-main-navy.png" },
       { colorName: "Maroon", hex: "#51272b", image: "/merch/sweater-main-maroon.png" }
     ],
@@ -73,7 +73,7 @@ export const products = [
     mainImage: "/merch/sweatpants-main-cream.png",
     colors: [
       { colorName: "Cream", hex: "#f3e3b2", image: "/merch/sweatpants-main-cream.png" },
-      { colorName: "Black", hex: "#0f0f0f", image: "/merch/sweatpants-main-black.png" },
+      { colorName: "Black", hex: "#1c1f24", image: "/merch/sweatpants-main-black.png" },
       { colorName: "Navy", hex: "#263f6d", image: "/merch/sweatpants-main-navy.png" },
       { colorName: "Maroon", hex: "#51272b", image: "/merch/sweatpants-main-maroon.png" }
     ],

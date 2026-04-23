@@ -4,10 +4,10 @@
       <i class="fas fa-arrow-left"></i> Back to Collection
     </button>
     <button 
-    @click="$emit('close')" 
-    class="fixed top-30 right-6 z-100 h-12 w-12 flex items-center justify-center bg-primary/80 p-0 m-0 backdrop-blur-md p-4 rounded-full shadow-lg md:hidden"
+      @click="$emit('close')" 
+      class="fixed top-30 right-6 z-[100] h-12 w-12 flex items-center justify-center bg-primary/80 backdrop-blur-md rounded-full shadow-lg md:hidden"
     >
-    <i class="fas fa-times text-secondary"></i>
+      <i class="fas fa-times text-secondary"></i>
     </button>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -51,14 +51,14 @@
           </div>
         </div>
 
-        <div class="mb-10">
+        <div class="mb-8">
           <h3 class="text-xs font-black uppercase tracking-widest mb-4">Select Size:</h3>
           <div class="flex gap-3">
             <button 
               v-for="size in ['S', 'M', 'L', 'XL', '2XL']" 
               :key="size"
               @click="selectedSize = size"
-              class="h-12 w-16 border-2 font-black transition-all rounded-xl"
+              class="h-12 w-16 border-2 font-black transition-all rounded-xl text-xs"
               :class="selectedSize === size ? 'bg-primary text-white border-primary' : 'bg-white text-primary border-slate-200 hover:border-primary'"
             >
               {{ size }}
@@ -66,7 +66,29 @@
           </div>
         </div>
 
-        <button class="w-full bg-primary text-white py-6 rounded-2xl font-black uppercase tracking-widest hover:bg-secondary transition-all shadow-xl">
+        <div class="mb-10">
+          <h3 class="text-xs font-black uppercase tracking-widest mb-4">Quantity:</h3>
+          <div class="flex items-center w-max bg-slate-50 rounded-2xl p-1 border border-slate-200">
+            <button 
+              @click="quantity = Math.max(1, quantity - 1)"
+              class="h-12 w-12 flex items-center justify-center text-primary hover:bg-white hover:shadow-sm rounded-xl transition-all"
+            >
+              <i class="fas fa-minus text-xs"></i>
+            </button>
+            <span class="w-16 text-center font-black text-xl text-primary">{{ quantity }}</span>
+            <button 
+              @click="quantity++"
+              class="h-12 w-12 flex items-center justify-center text-primary hover:bg-white hover:shadow-sm rounded-xl transition-all"
+            >
+              <i class="fas fa-plus text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <button 
+          @click="handleAddToCart"
+          class="w-full bg-primary text-white py-6 rounded-2xl font-black uppercase tracking-widest hover:bg-secondary hover:text-black transition-all shadow-xl active:scale-95"
+        >
           Add to Support
         </button>
       </div>
@@ -75,19 +97,21 @@
 </template>
 
 <script setup>
+import { useCart } from '~/composables/useCart';
+
 const props = defineProps(['product']);
-defineEmits(['close']);
+const emit = defineEmits(['close']);
+const { addToCart } = useCart();
 
 // Initial State
 const selectedColorObj = ref(props.product.colors[0]);
 const activeImage = ref(props.product.colors[0].image);
 const selectedSize = ref('M');
+const quantity = ref(1);
 
 // Logic to create the 4-item gallery
 const dynamicGallery = computed(() => {
-  // Take first 3 from variants
   const baseVariants = props.product.variants.slice(0, 3).map(v => v.image);
-  // Append the current selected color image as the 4th item
   return [...baseVariants, selectedColorObj.value.image];
 });
 
@@ -95,5 +119,19 @@ const dynamicGallery = computed(() => {
 const updateSelection = (color) => {
   selectedColorObj.value = color;
   activeImage.value = color.image;
+};
+
+// Handle Add to Cart with the quantity
+const handleAddToCart = () => {
+  const item = {
+    ...props.product,
+    selectedColor: selectedColorObj.value,
+    selectedSize: selectedSize.value,
+    quantity: quantity.value
+  };
+  
+  addToCart(item);
+  // Optional: reset quantity or close view after adding
+  quantity.value = 1;
 };
 </script>
