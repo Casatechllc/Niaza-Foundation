@@ -29,7 +29,17 @@
       </div>
 
       <div v-if="!isConfiguring" class="flex-1 flex flex-col">
-        <p class="text-sm text-slate-500 line-clamp-3 mb-6 leading-relaxed">
+        <div class="flex gap-2">
+            <button 
+              v-for="(color, index) in product.variants" 
+              :key="index"
+              @click="selectedImageIndex = index"
+              class="h-7 w-7 rounded-full border-2 transition-all hover:scale-110"
+              :class="selectedImageIndex === index ? 'border-secondary scale-110' : 'border-transparent'"
+              :style="{ backgroundColor: color.hex }"
+            />
+          </div>
+        <p class="text-sm text-slate-500 line-clamp-3 my-6 leading-relaxed">
           {{ product.description }}
         </p>
       </div>
@@ -108,13 +118,16 @@ const emit = defineEmits(['add-to-cart']);
 // Existing State
 const isConfiguring = ref(false);
 const selectedColorIndex = ref(0);
+const selectedImageIndex = ref(0);
 const selectedSize = ref('M');
 
 // Existing Computed values
 const currentColor = computed(() => props.product.colors[selectedColorIndex.value]);
 
+const currentImage = computed(() => props.product.variants[selectedImageIndex.value]);
+
 const displayImage = computed(() => {
-  return isConfiguring.value ? currentColor.value.image : props.product.mainImage;
+  return isConfiguring.value ? currentColor.value.image : currentImage.value.image;
 });
 
 const handleButtonClick = () => {

@@ -2,7 +2,7 @@
 export const products = [
   {
     id: 1,
-    name: "Foundation Signature Hoodie",
+    name: "Signature Hoodie",
     category: "Sweatshirt",
     price: 35,
     description: "100% Organic cotton. Proceeds fund one week of clean water.",
@@ -23,7 +23,7 @@ export const products = [
   },
   {
     id: 2,
-    name: "Foundation Signature Tee",
+    name: "Signature Tee",
     category: "T-Shirt",
     price: 35,
     description: "100% Organic cotton. Proceeds fund one week of clean water.",
@@ -44,7 +44,7 @@ export const products = [
   },
   {
     id: 3,
-    name: "Foundation Signature Sweater",
+    name: "Signature Sweater",
     category: "Sweatshirt",
     price: 35,
     description: "100% Organic cotton. Proceeds fund one week of clean water.",
@@ -65,7 +65,7 @@ export const products = [
   },
   {
     id: 4,
-    name: "Foundation Signature Sweatpants",
+    name: "Signature Sweatpants",
     category: "Sweatpants",
     price: 35,
     description: "100% Organic cotton. Proceeds fund one week of clean water.",
