@@ -9,21 +9,21 @@
   >
     <div 
       v-if="isOpen" 
-      class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-primary/40 backdrop-blur-md"
+      class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-primary/40 backdrop-blur-md border-2 border-secondary"
       @click.self="closeModal"
     >
       <div 
         v-motion
         :initial="{ opacity: 0, scale: 0.9, y: 20 }"
         :enter="{ opacity: 1, scale: 1, y: 0 }"
-        class="relative w-full max-w-lg overflow-hidden rounded-3xl bg-white shadow-2xl"
+        class="relative w-full max-w-lg overflow-hidden rounded-3xl bg-white shadow-2xl border-2 border-secondary"
       >
-        <div class="bg-accent px-8 py-6 border-b border-secondary/20">
+        <div class="bg-primary/90 px-8 py-6 border-b border-secondary/20">
           <div class="flex items-center justify-between">
-            <h3 class="text-2xl font-bold text-primary">Support Our Mission</h3>
+            <h3 class="text-2xl font-bold text-secondary">Support Our Mission</h3>
             <button 
               @click="closeModal" 
-              class="rounded-full p-2 text-slate-400 hover:bg-slate-200 hover:text-primary transition-colors"
+              class="rounded-full p-2 text-slate-100 hover:bg-slate-200 hover:text-primary transition-colors"
               aria-label="Close modal"
             >
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -31,7 +31,7 @@
               </svg>
             </button>
           </div>
-          <p class="mt-2 text-slate-600">
+          <p class="mt-2 text-slate-200">
             Your contribution directly funds sustainable housing and dignity for families in the DRC.
           </p>
         </div>
