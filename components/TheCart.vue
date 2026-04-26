@@ -98,8 +98,13 @@
             <span class="text-slate-500 font-bold uppercase text-xs tracking-widest">Subtotal</span>
             <span class="text-2xl font-black text-primary">${{ cartTotal }}</span>
           </div>
-          <button class="w-full bg-primary text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-secondary hover:text-black transition-all">
-            Secure Checkout
+          <button 
+            @click="handleCheckout"
+            :disabled="loading"
+            class="w-full bg-primary text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-secondary hover:text-black transition-all disabled:opacity-50"
+          >
+            <span v-if="loading">Processing...</span>
+            <span v-else>Secure Checkout</span>
           </button>
           <p class="text-[10px] text-center text-slate-400 italic">Every purchase powers foundational literacy and housing.</p>
         </div>
@@ -110,11 +115,39 @@
 
 <script setup>
 const { cart, isCartOpen, removeFromCart, updateItem, cartTotal } = useCart();
+import { ref, onMounted } from 'vue'
 
 const updateColor = (item, colorName) => {
   const newColor = item.colors.find(c => c.colorName === colorName);
   updateItem(item.cartId, { selectedColor: newColor });
 };
+
+const loading = ref(false)
+
+// 2. Wrap the cart logic so it's safe
+const cartStore = useCart() 
+
+const handleCheckout = async () => {
+  // Use the store values here instead of destructuring at the top
+  if (cartStore.cart.value.length === 0) return
+  
+  loading.value = true
+  try {
+    const response = await $fetch('/api/checkout', {
+      method: 'POST',
+      body: { cart: cartStore.cart.value }
+    })
+    
+    if (response.url) {
+      window.location.href = response.url
+    }
+  } catch (err) {
+    console.error("Checkout error:", err)
+  } finally {
+    loading.value = false
+  }
+}
+
 </script>
 
 <style scoped>

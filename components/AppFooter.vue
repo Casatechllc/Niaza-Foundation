@@ -45,9 +45,15 @@
 
       <div class="mt-16 border-t border-white/10 pt-8">
         <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <p class="text-sm text-slate-500">
-            &copy; {{ new Date().getFullYear() }} Nianza Foundation. All Rights Reserved.
-          </p>
+          <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <p class="text-sm text-slate-500">
+              &copy; {{ new Date().getFullYear() }} Nianza Foundation. All Rights Reserved.
+            </p>
+            <NuxtLink to="/privacy-policy" class="text-xs text-slate-500 uppercase font-bold tracking-widest hover:text-white transition-colors">
+              Privacy Policy
+            </NuxtLink>
+          </div>
+
           <p class="text-sm text-slate-500">
             Powered by 
             <a href="https://casatechllc.com" target="_blank" rel="noopener noreferrer" class="group font-bold transition-colors hover:text-white">

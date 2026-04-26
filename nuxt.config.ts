@@ -28,18 +28,23 @@ export default defineNuxtConfig({
       include: ['@vueuse/motion', '@vueuse/core', '@vueuse/shared'],
     },
     server: {
-      // Fixes the "IPC Connection Closed" on Windows/OneDrive
-      fs: {
-        strict: false
-      },
+      // Allow Netlify to manage the connection without forcing a protocol
+      hmr: true, 
       watch: {
         usePolling: true,
-        interval: 100
-      },
-      hmr: {
-        protocol: 'ws',
-        host: 'localhost'
       }
+    }
+  },
+
+  runtimeConfig: {
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+    public: {
+      stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+      stripeSuccessUrl: process.env.STRIPE_SUCCESS_URL,
+      stripeCancelUrl: process.env.STRIPE_CANCEL_URL,
+      siteUrl: process.env.NODE_ENV === 'production' 
+    ? 'https://your-live-domain.com' 
+    : 'https://nianza-foundation.netlify.app',
     }
   },
 

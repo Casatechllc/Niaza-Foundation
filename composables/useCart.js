@@ -3,6 +3,22 @@ export const useCart = () => {
   const cart = useState('cart', () => []);
   const isCartOpen = useState('isCartOpen', () => false);
 
+  // Sync to LocalStorage whenever the cart changes
+  if (process.client) {
+    // 1. Load the cart from storage on initialization
+    onMounted(() => {
+      const savedCart = localStorage.getItem('nianza_cart');
+      if (savedCart) {
+        cart.value = JSON.parse(savedCart);
+      }
+    });
+
+    // 2. Watch the cart and save it whenever it updates
+    watch(cart, (newCart) => {
+      localStorage.setItem('nianza_cart', JSON.stringify(newCart));
+    }, { deep: true });
+  }
+
   const addToCart = (item) => {
     // Check if the exact same item (ID + Color + Size) is already in the cart
     const existingItem = cart.value.find(i => 

@@ -75,10 +75,12 @@
 
           <button 
             @click="processDonation"
-            class="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-accent/80 py-5 text-xl font-bold text-primary shadow-xl transition-all hover:bg-accent  hover:scale-[1.02] active:scale-95"
+            :disabled="loading"
+            class="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-accent/80 py-5 text-xl font-bold text-primary shadow-xl transition-all hover:bg-accent hover:scale-[1.02] active:scale-95 disabled:opacity-50"
           >
-            <i class="fas fa-heart text-tertiary group-hover:animate-pulse"></i>
-            <span>Donate ${{ finalAmount || 0 }}</span>
+            <i v-if="!loading" class="fas fa-heart text-tertiary group-hover:animate-pulse"></i>
+            <span v-if="loading">Processing...</span>
+            <span v-else>Donate ${{ finalAmount || 0 }}</span>
           </button>
           
           <div class="mt-6 flex items-center justify-center gap-2 text-slate-400 text-sm">
@@ -102,6 +104,7 @@ import { ref, computed, watch } from 'vue';
 
 // Connect to Global State from app.vue
 const isOpen = useState('isDonateModalOpen');
+const loading = ref(false);
 
 const selectedAmount = ref(100);
 const customAmount = ref(null);
@@ -132,11 +135,30 @@ const handleCustomInput = () => {
   selectedAmount.value = 0;
 };
 
-const processDonation = () => {
+const processDonation = async () => {
   if (finalAmount.value <= 0) return alert('Please enter a valid amount');
   
-  alert(`Thank you for your donation of $${finalAmount.value}! Redirecting to secure checkout...`);
-  closeModal();
+  loading.value = true;
+  
+  try {
+    const response = await $fetch('/api/checkout', {
+      method: 'POST',
+      body: { 
+        // We send a specific "donation" flag or a simplified cart item
+        isDonation: true,
+        amount: finalAmount.value 
+      }
+    });
+
+    if (response.url) {
+      window.location.href = response.url;
+    }
+  } catch (err) {
+    console.error("Donation error:", err);
+    alert("There was an issue initiating the checkout.");
+  } finally {
+    loading.value = false;
+  }
 };
 
 // Keep exposed for legacy parent calls if necessary
