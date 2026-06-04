@@ -38,7 +38,7 @@
           <div class="absolute -left-12 top-1/4 hidden h-64 w-64 rounded-full bg-tertiary/10 blur-3xl lg:block"></div>
           
           <img 
-            src="/images/hero-shelter.png" 
+            src="/images/hero-shelter.jpg" 
             alt="Community members in the DRC" 
             class="absolute inset-0 h-full w-full object-cover"
           />
