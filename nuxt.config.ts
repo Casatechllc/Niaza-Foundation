@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 
   // 2. MODULES
   modules: [
-    '@vueuse/motion'
+    '@vueuse/motion/nuxt'
   ],
 
   // 3. GLOBAL CSS

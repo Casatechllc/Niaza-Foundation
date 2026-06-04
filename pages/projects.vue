@@ -2,7 +2,8 @@
   <div class="min-h-screen bg-slate-50 py-24 antialiased">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       
-      <header class="mb-20" v-motion-slide-down>
+      <!-- FIXED: Replaced v-motion with native CSS / Tailwind for safety -->
+      <header class="mb-20 animate-fade-in-down">
         <h1 class="text-6xl font-black text-primary uppercase italic leading-none">
           Project <span class="text-secondary">Archive</span>
         </h1>
@@ -12,6 +13,7 @@
         </p>
       </header>
 
+      <!-- SECTIONS -->
       <div class="space-y-32">
         <ProjectSection 
           v-for="project in projects" 
@@ -25,9 +27,27 @@
 </template>
 
 <script setup>
-import { projects } from '~/data/gallery.js';
+const { projects } = useProjects();
 
 useHead({
   title: 'Gallery | Nianza Foundation'
 });
 </script>
+
+<style scoped>
+/* A rock-solid CSS animation that replaces the broken directive */
+.animate-fade-in-down {
+  animation: fadeInDown 0.8s ease-out forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>

@@ -84,4 +84,46 @@ export const products = [
       { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/sweatpants-tan-3.png" }
     ]
   },
+  {
+    id: 5,
+    name: "Zip Up Hoodie",
+    category: "Zip Up",
+    price: 45,
+    description: "100% Organic cotton. Proceeds fund one week of clean water.",
+    impact: "Provides 1 week of water",
+    mainImage: "/merch/zip-up-hoodie-alt-logo-1.png",
+    colors: [
+      { colorName: "Black", hex: "#1c1f24", image: "/merch/zip-up-hoodie-alt-logo-1.png" },
+      { colorName: "Cream", hex: "#f3e3b2", image: "/merch/zip-up-hoodie-alt-logo-main-cream.png" },
+      { colorName: "Navy", hex: "#263f6d", image: "/merch/zip-up-hoodie-alt-logo-main-navy.png" },
+      { colorName: "Maroon", hex: "#51272b", image: "/merch/zip-up-hoodie-alt-logo-main-maroon.png" }
+    ],
+    variants: [
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/zip-up-hoodie-alt-logo-2.png" },
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/zip-up-hoodie-alt-logo-3.png" },
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/zip-up-hoodie-alt-logo-4.png" },
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/zip-up-hoodie-alt-logo-1.png" }
+    ]
+  },
+  {
+    id: 5,
+    name: "Premium Shorts",
+    category: "Shorts",
+    price: 45,
+    description: "100% Organic cotton. Proceeds fund one week of clean water.",
+    impact: "Provides 1 week of water",
+    mainImage: "/merch/shorts-logo2-main-gray.png",
+    colors: [
+      { colorName: "Gray", hex: "#aaa9a7", image: "/merch/shorts-logo2-main-gray.png" },
+      { colorName: "Black", hex: "#1c1f24", image: "/merch/shorts-logo2-main-black.png" },
+      { colorName: "Navy", hex: "#263f6d", image: "/merch/shorts-logo2-main-navy.png" },
+      { colorName: "Maroon", hex: "#51272b", image: "/merch/shorts-logo2-main-maroon.png" }
+    ],
+    variants: [
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/shorts-logo2-main-gray-1.png" },
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/shorts-logo2-main-gray-2.png" },
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/shorts-logo2-main-gray-3.png" },
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/shorts-logo2-main-gray.png" }
+    ]
+  },
 ];
