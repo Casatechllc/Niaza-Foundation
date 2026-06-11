@@ -5,7 +5,7 @@ export const products = [
     name: "Signature Hoodie",
     category: "Sweatshirt",
     price: 50,
-    description: "100% Organic cotton. Proceeds fund one week of clean water.",
+    description: "Proceeds fund one week of clean water.",
     impact: "Provides 1 week of water",
     mainImage: "/merch/hoodie-black-3.png",
     colors: [
@@ -26,7 +26,7 @@ export const products = [
     name: "Signature Tee",
     category: "T-Shirt",
     price: 30,
-    description: "100% Organic cotton. Proceeds fund one week of clean water.",
+    description: "Proceeds fund one week of clean water.",
     impact: "Provides 1 week of water",
     mainImage: "/merch/t-shirt_main_navy.png",
     colors: [
@@ -47,7 +47,7 @@ export const products = [
     name: "Signature Sweater",
     category: "Sweatshirt",
     price: 35,
-    description: "100% Organic cotton. Proceeds fund one week of clean water.",
+    description: "Proceeds fund one week of clean water.",
     impact: "Provides 1 week of water",
     mainImage: "/merch/sweater-main-gray.png",
     colors: [
@@ -68,7 +68,7 @@ export const products = [
     name: "Signature Sweatpants",
     category: "Sweatpants",
     price: 45,
-    description: "100% Organic cotton. Proceeds fund one week of clean water.",
+    description: "Proceeds fund one week of clean water.",
     impact: "Provides 1 week of water",
     mainImage: "/merch/sweatpants-main-cream.png",
     colors: [
@@ -89,7 +89,7 @@ export const products = [
     name: "Zip Up Hoodie",
     category: "Zip Up",
     price: 45,
-    description: "100% Organic cotton. Proceeds fund one week of clean water.",
+    description: "Proceeds fund one week of clean water.",
     impact: "Provides 1 week of water",
     mainImage: "/merch/zip-up-hoodie-alt-logo-1.png",
     colors: [
@@ -109,8 +109,8 @@ export const products = [
     id: 5,
     name: "Premium Shorts",
     category: "Shorts",
-    price: 45,
-    description: "100% Organic cotton. Proceeds fund one week of clean water.",
+    price: 30,
+    description: "Proceeds fund one week of clean water.",
     impact: "Provides 1 week of water",
     mainImage: "/merch/shorts-logo2-main-gray.png",
     colors: [
@@ -124,6 +124,28 @@ export const products = [
       { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/shorts-logo2-main-gray-2.png" },
       { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/shorts-logo2-main-gray-3.png" },
       { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/shorts-logo2-main-gray.png" }
+    ]
+  },
+
+  {
+    id: 6,
+    name: "Premium t-shirt w/ Large Logo",
+    category: "t-shirt",
+    price: 30,
+    description: "Proceeds fund one week of clean water.",
+    impact: "Provides 1 week of water",
+    mainImage: "/merch/t-shirt-large-logo-black-1.png",
+    colors: [
+      { colorName: "Black", hex: "#1c1f24", image: "/merch/t-shirt-large-logo-black-1.png" },
+      { colorName: "cream", hex: "#f3e3b2", image: "/merch/t-shirt-large-logo-cream.png" },
+      { colorName: "Navy", hex: "#263f6d", image: "/merch/t-shirt-large-logo-navy.png" },
+      { colorName: "Maroon", hex: "#51272b", image: "/merch/t-shirt-large-logo-maroon.png" }
+    ],
+    variants: [
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/t-shirt-large-logo-black-2.png" },
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/t-shirt-large-logo-black-3.png" },
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/t-shirt-large-logo-black-4.png" },
+      { colorName: "Signature Sweatpants", hex: "#f3e3b2", image: "/merch/t-shirt-large-logo-black-1.png" }
     ]
   },
 ];
