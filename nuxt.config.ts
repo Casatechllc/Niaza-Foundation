@@ -68,6 +68,21 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/png', href: '/logo.png' },
         { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400;700&display=swap' }
+      ],
+
+      meta: [
+        // Open Graph / Facebook / LinkedIn
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: 'Nianza Foundation | Building Hope in DRC' },
+        { property: 'og:description', content: 'Join us in creating sustainable, state-backed pathways from homelessness to long-term stability.' },
+        { property: 'og:image', content: 'https://nianzafoundationinitiative.com/meta-image.jpg' },
+        { property: 'og:url', content: 'https://nianzafoundationinitiative.com' },
+
+        // Twitter / X
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'Nianza Foundation | Building Hope in DRC' },
+        { name: 'twitter:description', content: 'Join us in creating sustainable, state-backed pathways from homelessness to long-term stability.' },
+        { name: 'twitter:image', content: 'https://nianzafoundationinitiative.com/meta-image.jpg' }
       ]
     }
   },
