@@ -10,7 +10,10 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify'
+    preset: 'netlify',
+    output: {
+      publicDir: 'dist' // Hard-forces the compilation engine to name the folder exactly what the Netlify UI expects
+    }
   },
 
   // 2. MODULES
