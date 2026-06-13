@@ -10,12 +10,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify',
-    // Force Nitro to look directly at your root folder layout
-    scanDir: './server', 
-    serverHandlers: [
-      { route: '/api/checkout', handler: '~/server/api/checkout/index.post.js' }
-    ]
+    preset: 'netlify'
   },
 
   // 2. MODULES
