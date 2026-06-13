@@ -32,12 +32,22 @@
           <h5 class="text-secondary font-bold uppercase tracking-widest text-sm mb-6">Contact Us</h5>
           <ul class="space-y-4 text-slate-400">
             <li class="flex items-center justify-start lg:justify-end gap-3">
-              <span>Kinshasa, DRC</span>
-              <i class="fas fa-map-marker-alt text-tertiary"></i>
+              <span class="order-2 lg:order-1">{{ contactInfo.addressShort }}</span>
+              <i class="fas fa-map-marker-alt text-tertiary order-1 lg:order-2"></i>
             </li>
+            
             <li class="flex items-center justify-start lg:justify-end gap-3">
-              <a href="mailto:info@nianzafoundation.org" class="hover:text-white transition-colors">info@nianzafoundation.org</a>
-              <i class="fas fa-envelope text-tertiary"></i>
+              <a :href="`mailto:${contactInfo.email}`" class="hover:text-white transition-colors order-2 lg:order-1">
+                {{ contactInfo.email }}
+              </a>
+              <i class="fas fa-envelope text-tertiary order-1 lg:order-2"></i>
+            </li>
+
+            <li class="flex items-center justify-start lg:justify-end gap-3">
+              <a :href="`tel:${contactInfo.phoneRaw}`" class="hover:text-white transition-colors order-2 lg:order-1">
+                {{ contactInfo.phone }}
+              </a>
+              <i class="fas fa-phone text-tertiary order-1 lg:order-2"></i>
             </li>
           </ul>
         </div>
@@ -68,6 +78,8 @@
 
 <script setup>
 import { inject } from 'vue';
+// Imported dynamic workspace variables
+import { contactInfo } from '~/data/contact.js';
 
 // MUST match the string 'openDonateModal' from app.vue
 const openDonate = inject('openDonateModal');

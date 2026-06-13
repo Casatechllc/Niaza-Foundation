@@ -14,7 +14,27 @@
             Building Hope and Dignity for Every Congolese Without a Home. Join us in creating sustainable, state-backed pathways from homelessness to long-term stability.
           </p>
 
-          <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm sm:text-base font-medium text-slate-700">
+            <a 
+              :href="`mailto:${contactInfo.email}`" 
+              class="flex items-center gap-2 transition-colors hover:text-secondary"
+            >
+              <i class="fas fa-envelope text-secondary"></i>
+              <span>{{ contactInfo.email }}</span>
+            </a>
+            
+            <span class="hidden h-4 w-px bg-slate-300 sm:block"></span>
+
+            <a 
+              :href="`tel:${contactInfo.phoneRaw}`" 
+              class="flex items-center gap-2 transition-colors hover:text-secondary"
+            >
+              <i class="fas fa-phone text-secondary"></i>
+              <span>{{ contactInfo.phone }}</span>
+            </a>
+          </div>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <button 
               @click="handleDonateClick"
               class="group relative inline-flex items-center justify-center rounded-full bg-tertiary px-8 py-4 text-base font-bold text-white shadow-md transition-all hover:bg-tertiary/80 hover:shadow-lg active:scale-95"
@@ -51,6 +71,8 @@
 
 <script setup>
 import { inject } from 'vue';
+// Imported global contact layout data variables
+import { contactInfo } from '~/data/contact.js';
 
 // MUST match the string 'openDonateModal' from app.vue
 const openDonate = inject('openDonateModal');

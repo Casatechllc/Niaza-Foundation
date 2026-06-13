@@ -48,7 +48,7 @@
             active-class="text-gray-900 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary"
             inactive-class="text-gray-500 hover:text-gray-900"
           >
-            Our Mission
+            About Us
           </NuxtLink>
         </li>
         <li>
@@ -115,7 +115,7 @@
         <div class="-my-6 divide-y divide-gray-500/10">
           <ul class="space-y-2 py-6">
             <li><NuxtLink to="/" @click="mobileMenuOpen = false" class="mobile-nav-link">Sustainable Housing</NuxtLink></li>
-            <li><NuxtLink to="/about" @click="mobileMenuOpen = false" class="mobile-nav-link">Our Mission</NuxtLink></li>
+            <li><NuxtLink to="/about" @click="mobileMenuOpen = false" class="mobile-nav-link">About Us</NuxtLink></li>
             <li><NuxtLink to="/projects" @click="mobileMenuOpen = false" class="mobile-nav-link">Community Projects</NuxtLink></li>
             <li><NuxtLink to="/merch" @click="mobileMenuOpen = false" class="mobile-nav-link">Support Shop</NuxtLink></li>
           </ul>

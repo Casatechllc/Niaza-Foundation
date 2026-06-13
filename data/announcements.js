@@ -6,7 +6,7 @@ export const announcements = [
     title: "The Kinshasa Orphanage Sanctuary",
     content: "Our children are currently sleeping on temporary floor mattresses. Help us finish Phase 2 construction to secure a dedicated sleeping wing and a proper community cafeteria.",
     // Uses a clean fallback from your new project folder structure
-    image: "/images/projects/project1/6dbe74c7-cf4d-4d6c-8f47-e4f3f4296de9[1].JPG", 
+    image: "/images/projects/project1/PHOTO-2026-06-01-09-41-27[2].JPG", 
     linkText: "View Project Archive",
     linkUrl: "/projects"
   },

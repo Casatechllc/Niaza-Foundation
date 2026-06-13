@@ -16,6 +16,12 @@
         {{ project.subtitle }}
       </p>
 
+      <!-- LOCATION STRIP (Only renders if a valid, non-empty location string exists) -->
+    <div v-if="project.location && project.location.trim() !== ''" class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-secondary bg-secondary/10 px-3 py-1 mb-5 rounded-full">
+      <i class="fas fa-map-marker-alt"></i>
+      <span>{{ project.location }}</span>
+    </div>
+
       <p class="max-w-3xl text-lg text-slate-600 leading-relaxed">
         {{ project.description }}
       </p>

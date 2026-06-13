@@ -49,7 +49,7 @@
         </div>
       </section>
 
-      <section class="bg-primary w-full py-20 mb-24 overflow-hidden relative">
+      <section class="bg-primary w-full py-20  overflow-hidden relative">
         <div class="absolute bottom-0 left-0 -ml-20 -mb-20 h-96 w-96 rounded-full bg-secondary/10 blur-3xl"></div>
 
         <div class="mx-auto max-w-[1600px] px-6 lg:px-12 relative z-10">
@@ -102,6 +102,10 @@
           </div>
         </div>
       </section>
+      <div class="bg-secondary/80 py-24 mb-24">
+        <ContactInfoCard class="mb-6"/>
+      </div>
+      
 
       <section class="mb-24">
         <div 
