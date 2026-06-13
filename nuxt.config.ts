@@ -43,7 +43,7 @@ export default defineNuxtConfig({
       stripeSuccessUrl: process.env.STRIPE_SUCCESS_URL,
       stripeCancelUrl: process.env.STRIPE_CANCEL_URL,
       siteUrl: process.env.NODE_ENV === 'production' 
-    ? 'https://your-live-domain.com' 
+    ? 'https://nianzafoundationinitiative.com' 
     : 'https://nianza-foundation.netlify.app',
     }
   },
