@@ -9,6 +9,15 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
 
+  nitro: {
+    preset: 'netlify',
+    // Force Nitro to look directly at your root folder layout
+    scanDir: './server', 
+    serverHandlers: [
+      { route: '/api/checkout', handler: '~/server/api/checkout/index.post.js' }
+    ]
+  },
+
   // 2. MODULES
   modules: [
     '@vueuse/motion/nuxt'
